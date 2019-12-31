@@ -1,0 +1,239 @@
+@font-face {
+  font-family: 'Garamond Regular';
+  font-weight: normal;
+  font-style: normal;
+  src: url(1e7eb34406095703224d6dc6de1b70a4.woff2) format("woff2"); }
+
+/*
+ *
+ * for use in IE <=8 set background color
+ */
+.link {
+  color: #101010;
+  text-decoration: none;
+  transition-duration: .3s;
+  transition-property: color; }
+  .link:hover {
+    color: #bb4d27; }
+  .link_tag {
+    color: #fff;
+    background-color: #403939;
+    border-radius: 8px;
+    padding: 2px 5px;
+    font-weight: bold; }
+    .link_tag:hover {
+      box-shadow:   0 0 7px 0 #bb4d27; }
+
+.animated-link {
+  position: relative;
+  background: none;
+  color: #d05125;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 0.2em solid #d05125;
+  padding: 0.5em 1em; }
+  .animated-link::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 10%;
+    background: #f5f3f3;
+    height: 0.3em;
+    right: 20%;
+    top: -0.21em;
+    transform: skewX(-45deg);
+    -webkit-transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+    transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1); }
+  .animated-link::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 10%;
+    background: #f5f3f3;
+    height: 0.3em;
+    left: 20%;
+    bottom: -0.25em;
+    transform: skewX(45deg);
+    -webkit-transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+    transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1); }
+  .animated-link:hover::before {
+    right: 80%; }
+  .animated-link:hover::after {
+    left: 80%; }
+
+.header {
+  box-shadow:  inset 0px -1px 0px 0 #989898;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  height: 90px;
+  padding: 5px 20px; }
+  .header__item {
+    margin: 0 30px;
+    font-size: 22px; }
+  .header__logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%; }
+    .header__logo img {
+      height: 100%;
+      max-height: 60px; }
+    .header__logo span {
+      display: block;
+      font-size: 24px;
+      font-weight: bold; }
+  .header .navbar {
+    display: flex; }
+
+footer {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  height: 20px;
+  color: #fff;
+  margin-top: 20px;
+  background-color: #d05125; }
+
+.main-page-receipts {
+  display: flex;
+  max-width: 1300px;
+  margin: auto;
+  flex-wrap: wrap;
+  padding: 20px;
+  justify-content: space-evenly; }
+  .main-page-receipts__button {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px; }
+
+.main-page-receipts-title {
+  text-align: center; }
+
+.main-page-receipt {
+  margin-bottom: 20px; }
+  .main-page-receipt__image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 50px;
+    background: no-repeat center;
+    background-size: cover;
+    width: 300px;
+    height: 300px;
+    box-shadow:   0 1px 5px 1px #2d2a2a; }
+  .main-page-receipt__title {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out 0s;
+    -webkit-transition: opacity 0.5s ease-in-out 0s;
+    -moz-transition: opacity 0.5s ease-in-out 0s;
+    -ms-transition: opacity 0.5s ease-in-out 0s;
+    -o-transition: opacity 0.5s ease-in-out 0s; }
+    .main-page-receipt__title p {
+      display: block;
+      font-size: 20px;
+      padding: 20px; }
+    .main-page-receipt__title:hover {
+      opacity: 0.8; }
+
+.main-slider {
+  margin-top: 20px; }
+  .main-slider__item {
+    max-height: 400px; }
+    .main-slider__item img {
+      height: 100%;
+      width: 100%; }
+
+.about {
+  max-width: 500px;
+  margin: 30px auto auto;
+  text-align: center; }
+
+.receipts-list {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto; }
+  .receipts-list .receipt {
+    display: flex;
+    margin: 0 auto 20px;
+    max-width: 1000px;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow:   0 1px 2px 0 rgba(0, 0, 0, 0.16); }
+    .receipts-list .receipt__image {
+      max-height: 200px; }
+      .receipts-list .receipt__image img {
+        width: 200px; }
+    .receipts-list .receipt__wrapper {
+      display: flex;
+      flex-direction: column;
+      margin-left: 10px;
+      padding: 10px 0; }
+    .receipts-list .receipt__tags {
+      margin-bottom: 10px; }
+      .receipts-list .receipt__tags .link_tag {
+        margin-right: 2px; }
+    .receipts-list .receipt__title {
+      font-size: 23px;
+      font-weight: bold; }
+    .receipts-list .receipt__stats {
+      display: flex;
+      margin-top: auto; }
+    .receipts-list .receipt__ingredients {
+      display: flex;
+      margin-right: 15px; }
+      .receipts-list .receipt__ingredients-icon {
+        width: 15px;
+        height: 15px;
+        margin-right: 3px; }
+        .receipts-list .receipt__ingredients-icon img {
+          width: 100%;
+          height: 100%; }
+    .receipts-list .receipt__duration {
+      display: flex; }
+      .receipts-list .receipt__duration-icon {
+        width: 15px;
+        height: 15px;
+        margin-right: 3px; }
+        .receipts-list .receipt__duration-icon img {
+          width: 100%;
+          height: 100%; }
+
+.receipt-card {
+  width: 1000px;
+  margin: 20px auto;
+  background-color: white; }
+  .receipt-card__title {
+    padding: 20px;
+    text-align: center; }
+  .receipt-card__image {
+    width: 100%;
+    height: 600px;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center; }
+  .receipt-card__tags {
+    margin-top: 20px;
+    text-align: center; }
+  .receipt-card__content {
+    padding: 20px; }
+
+body {
+  height: 100%;
+  position: relative;
+  background: #f5f3f3;
+  padding: 0;
+  margin: 0;
+  font-family: 'Garamond Regular', serif;
+  font-size: 16px;
+  color: #101010; }

@@ -1,0 +1,30 @@
+@mixin respond-to($media) {
+   $min: null;
+   $max: null;
+   @if $media == phone or $media == mobile {
+      /*@media only screen and (max-width: $screen-xs-max) {*/
+      $max: $screen-xs-max;
+   }
+   @else if $media == tablet {
+      /*@media only screen and (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {*/
+      $min: $screen-sm-min;
+      $max: $screen-sm-max;
+   }
+   @else if $media == desktop {
+      /*@media only screen and (min-width: $screen-md-min) and (max-width: $screen-md-max) {*/
+      $min: $screen-md-min;
+      $max: $screen-md-max;
+   }
+   @else if $media == wide-desktop {
+      /*@media only screen and (min-width: $screen-lg-min) {*/
+      $min: $screen-lg-min;
+   }
+
+   $attr: if($min != null, '(min-width:' + $min + ')', '')
+         + if($min != null and $max != null, ' and ', '')
+         + if($max != null, '(max-width:' + $max + ')', '')
+   ;
+   @media #{unquote($attr)} {
+      @content;
+   }
+}

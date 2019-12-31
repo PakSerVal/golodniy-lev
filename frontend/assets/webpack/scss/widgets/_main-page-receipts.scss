@@ -1,0 +1,57 @@
+.main-page-receipts {
+  display:         flex;
+  max-width:       1300px;
+  margin:          auto;
+  flex-wrap:       wrap;
+  padding:         20px;
+  justify-content: space-evenly;
+
+  &__button {
+    width:      100%;
+    text-align: center;
+    margin-top: 20px;
+  }
+}
+
+.main-page-receipts-title {
+  text-align: center;
+}
+
+.main-page-receipt {
+  margin-bottom: 20px;
+
+  &__image {
+    position:        relative;
+    overflow:        hidden;
+    border-radius:   50px;
+    background:      no-repeat center;
+    background-size: cover;
+    width:           300px;
+    height:          300px;
+    @include box-shadow(0 1px 5px 1px #2d2a2a);
+  }
+
+  &__title {
+    position:         absolute;
+    display:          flex;
+    justify-content:  center;
+    align-items:      center;
+    color:            #fff;
+    text-decoration:  none;
+    width:            100%;
+    height:           100%;
+    background-color: black;
+    opacity:          0;
+    @include transition(opacity, .5s, ease-in-out);
+
+    p {
+      display:   block;
+      font-size: 20px;
+      padding:   20px;
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+@import "fonts";
+@import "variables";
+@import "mixins/mixins";
+@import "common/common";
+@import "widgets/widgets";
+
+// Pages
+@import "main-page/main-page";
+@import "receipts/receipts";
+
+body {
+  height:      100%;
+  position:    relative;
+  background:  #f5f3f3;
+  padding:     0;
+  margin:      0;
+  font-family: 'Garamond Regular', serif;
+  font-size:   16px;
+  color:       $base-color;
+}

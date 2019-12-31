@@ -1,0 +1,197 @@
+/*
+ *
+ * for use in IE <=8 set background color
+ */
+@mixin box-shadow($values: none, $ie_lt9: false) {
+   $result: '';
+   $isNone: false;
+   @if list_separator($values) == space {
+      @if nth($values, 1) == none {
+         $isNone: true;
+         $result: $values;
+      }
+      $values: ($values,);
+   }
+
+   @if $isNone == false {
+      @for $vi from 1 to length($values) + 1 {
+         $val: nth($values, $vi);
+         $len: length($val);
+         $inset: 0; // inset == 0 is equal FALSE, inset == 1 is equal TRUE;
+         $x: 0;
+         $y: 0;
+         $blur: 0;
+         $expansion: 0;
+         $color: black;
+
+         $shift: 0;
+
+         @if type_of(nth($val, 1)) != number {
+            $shift: 1;
+            $inset: if(nth($val, 1) == inset, 1, 0);
+         }
+
+         @if $len >= 2 {
+            // [<inset>] <x> <y> [<blur> [<expansion>]] [<color>];
+            $x: nth($val, 1 + $shift);
+            $y: nth($val, 2 + $shift);
+            @if $len >= 3 + $shift and type_of(nth($val, 3 + $shift)) == number {
+               // [<inset>] <x> <y> <blur> [<expansion>] [<color>];
+               $blur: nth($val, 3 + $shift);
+               $shift: $shift + 1;
+            }
+            @if $len >= 3 + $shift {
+               @if $shift - $inset == 1 and $len >= 3 + $shift and type_of(nth($val, 3 + $shift)) == number {
+                  //<inset> <x> <y> <blur> <expansion> [<color>];
+                  $expansion: nth($val, 3 + $shift);
+                  $shift: $shift + 1;
+               }
+            }
+
+            @if $len >= 3 + $shift {
+               $color: nth($val, 3 + $shift);
+            }
+
+            $result: unquote($result + if($vi == 1, '', ',')) unquote(if($inset == 1, 'inset', '')) $x $y $blur $expansion $color;
+         } @else {
+            $result: unquote($result + if($vi == 1, '', ',')) $val;
+         }
+
+         @if  nth($val, length($val)) == '!important' {
+            $result: $result !important;
+         }
+      }
+   }
+
+   box-shadow: $result;
+}
+
+@mixin text-shadow($values: none) {
+   $result: '';
+   @if list_separator($values) == space {
+      $values: ($values,);
+   }
+
+   @for $vi from 1 to length($values) + 1 {
+      $val: nth($values, $vi);
+      $len: length($val);
+      // shadow params
+      $x: 0;
+      $y: 0;
+      $radius: 0;
+      $color: null;
+
+      $shift: 0;
+
+      @if $len >= 2 {
+         // <x> <y> [<radius>] [<color>];
+         $x: nth($val, 1);
+         $y: nth($val, 2);
+         @if $len >= 3 + $shift and type_of(nth($val, 3 + $shift)) == number {
+            // <x> <y> <blur> [<color>];
+            $radius: nth($val, 3 + $shift);
+            $shift: $shift + 1;
+         }
+
+         @if $len >= 3 + $shift {
+            // <x> <y> [<blur>] <color>
+            $color: nth($val, 3 + $shift);
+         }
+
+         $result: unquote($result + if($vi == 1, '', ',')) $x $y $radius unquote(if($color == null, '', $color));
+      } @else {
+         $result: unquote($result + if($vi == 1, '', ',')) $val;
+      }
+
+      /// for IE <9;
+      @if $vi == length($values) and $val != none {
+         @if $x == 0 {
+            $x: 0.000000000000001px;
+         }
+         $angle: (atan($y / $x) * 180 / pi() + 90) % 360;
+         $strength: sqrt(pow($x, 2) + pow($y, 2));
+         filter: Shadow(direction=#{$angle}, color=ie_hex_str($color), strength=#{$strength});
+      }
+   }
+
+   text-shadow: $result;
+}
+
+@mixin box-sizing($val: content-box) {
+   box-sizing: $val;
+}
+
+@mixin border-radius($val: 0) {
+   border-radius: $val;
+}
+
+@mixin border-sided-radius($sides: none) {
+   @if type-of($sides) == map {
+      $i: 1;
+
+      @while $i <= length($sides) {
+         $keys: map-keys($sides);
+         $key: nth($keys, $i);
+         $val: map-get($sides, $key);
+         $side-list: ();
+
+         @if $key == '' or $key == none {
+            $key: '';
+         }
+         @else {
+            $side-list: (
+                    'left'   : ('top-left'     : $val, 'bottom-left'   : $val),
+                    'top'    : ('top-left'     : $val, 'top-right'     : $val),
+                    'right'  : ('top-right'    : $val, 'bottom-right'  : $val),
+                    'bottom' : ('bottom-left'  : $val, 'bottom-right'  : $val)
+            );
+         }
+
+         @if (map-has-key($side-list, $key)) {
+            $sides: map-remove($sides, $key);
+            $sides: map-merge($sides, map-get($side-list, $key));
+         }
+         @else {
+            $key: if($key == '', '', '-' + $key);
+            -webkit-border#{$key}-radius : $val; /* Safari, Google Chrome */
+            -khtml-border#{$key}-radius : $val; /* KHTML */
+            -icab-border#{$key}-radius  : $val; /* Icab */
+            -moz-border#{$key}-radius   : $val; /* Firefox */
+            -ms-border#{$key}-radius    : $val; /* IE8 */
+            -o-border#{$key}-radius     : $val; /* Opera */
+            border#{$key}-radius        : $val; /* CSS3 */
+
+            $i: $i + 1;
+         }
+      }
+   }
+   @else {
+      @include border-sided-radius(('': $sides));
+   }
+}
+
+
+@mixin transition($prop: all, $duration: 0s, $timing-fn: ease, $delay: 0s) {
+   $val: none;
+   @if $prop != none {
+      $val: $prop $duration $timing-fn $delay;
+   }
+
+  transition:         $val;
+  -webkit-transition: $val;
+  -moz-transition:    $val;
+  -ms-transition:     $val;
+  -o-transition:      $val;
+}
+
+@mixin column-count($count: auto) {
+   -webkit-column-count: $count;
+   -moz-column-count: $count;
+   column-count: $count;
+}
+
+@mixin column-gap($width: normal) {
+   -webkit-column-gap: $width;
+   -moz-column-gap:    $width;
+   column-gap:         $width;
+}

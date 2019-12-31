@@ -1,0 +1,70 @@
+.link {
+  color:               $base-color;
+  text-decoration:     none;
+  transition-duration: .3s;
+  transition-property: color;
+
+  &:hover {
+    color: #bb4d27;
+  }
+
+  &_tag {
+    color:            #fff;
+    background-color: #403939;
+    border-radius:    8px;
+    padding:          2px 5px;
+    font-weight:      bold;
+
+    &:hover {
+      @include box-shadow(0 0 7px 0 #bb4d27);
+    }
+  }
+}
+
+.animated-link {
+  position:        relative;
+  background:      none;
+  color:           #d05125;
+  text-transform:  uppercase;
+  text-decoration: none;
+  border:          0.2em solid #d05125;
+  padding:         0.5em 1em;
+
+  &::before {
+    content:            "";
+    display:            block;
+    position:           absolute;
+    width:              10%;
+    background:         #f5f3f3;
+    height:             0.3em;
+    right:              20%;
+    top:                -0.21em;
+    transform:          skewX(-45deg);
+    -webkit-transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+    transition:         all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+
+  &::after {
+    content:            "";
+    display:            block;
+    position:           absolute;
+    width:              10%;
+    background:         #f5f3f3;
+    height:             0.3em;
+    left:               20%;
+    bottom:             -0.25em;
+    transform:          skewX(45deg);
+    -webkit-transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+    transition:         all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+
+  &:hover {
+    &::before {
+      right: 80%;
+    }
+
+    &::after {
+      left: 80%;
+    }
+  }
+}
