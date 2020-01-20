@@ -38,16 +38,17 @@ class ReceiptsRepository {
         $result = [];
 
         foreach ($receipts as $receipt) {
-            $receiptDTO              = new ReceiptDTO();
-            $receiptDTO->id          = $receipt->id;
-            $receiptDTO->title       = $receipt->title;
-            $receiptDTO->description = $receipt->description;
-            $receiptDTO->duration    = $receipt->duration;
-            $receiptDTO->videoUrl    = $receipt->video_url;
-            $receiptDTO->imageUrl    = $receipt->getImageUrl();
-            $receiptDTO->steps       = $this->getReceiptSteps($receipt->id);
-            $receiptDTO->ingredients = $this->getReceiptIngredients($receipt->id);
-            $receiptDTO->tags        = $this->getReceiptTags($receipt->id);
+            $receiptDTO                = new ReceiptDTO();
+            $receiptDTO->id            = $receipt->id;
+            $receiptDTO->title         = $receipt->title;
+            $receiptDTO->description   = $receipt->description;
+            $receiptDTO->duration      = $receipt->duration;
+            $receiptDTO->portionsCount = $receipt->portions_count;
+            $receiptDTO->videoUrl      = $receipt->video_url;
+            $receiptDTO->imageUrl      = $receipt->getImageUrl();
+            $receiptDTO->steps         = $this->getReceiptSteps($receipt->id);
+            $receiptDTO->ingredients   = $this->getReceiptIngredients($receipt->id);
+            $receiptDTO->tags          = $this->getReceiptTags($receipt->id);
 
             $result[] = $receiptDTO;
         }
@@ -71,16 +72,17 @@ class ReceiptsRepository {
             return null;
         }
 
-        $result              = new ReceiptDTO();
-        $result->id          = $source->id;
-        $result->title       = $source->title;
-        $result->description = $source->description;
-        $result->imageUrl    = $source->getImageUrl();
-        $result->duration    = $source->duration;
-        $result->videoUrl    = $source->video_url;
-        $result->steps       = $this->getReceiptSteps($id);
-        $result->ingredients = $this->getReceiptIngredients($id);
-        $result->tags        = $this->getReceiptTags($id);
+        $result                = new ReceiptDTO();
+        $result->id            = $source->id;
+        $result->title         = $source->title;
+        $result->description   = $source->description;
+        $result->imageUrl      = $source->getImageUrl();
+        $result->duration      = $source->duration;
+        $result->portionsCount = $source->portions_count;
+        $result->videoUrl      = $source->video_url;
+        $result->steps         = $this->getReceiptSteps($id);
+        $result->ingredients   = $this->getReceiptIngredients($id);
+        $result->tags          = $this->getReceiptTags($id);
 
         return $result;
     }

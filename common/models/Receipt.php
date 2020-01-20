@@ -18,15 +18,18 @@ use yii\db\Expression;
  * @property string $created_at
  * @property int    $duration
  * @property string $video_url
+ * @property int    $portions_count
  */
 class Receipt extends ActiveRecord {
-    const ATTR_ID            = 'id';
-    const ATTR_TITLE         = 'title';
-    const ATTR_DESCRIPTION   = 'description';
-    const ATTR_MAIN_IMAGE_ID = 'main_image_id';
-    const ATTR_CREATED_AT    = 'created_at';
-    const ATTR_DURATION      = 'duration';
-    const ATTR_VIDEO_URL     = 'video_url';
+
+    const ATTR_ID             = 'id';
+    const ATTR_TITLE          = 'title';
+    const ATTR_DESCRIPTION    = 'description';
+    const ATTR_MAIN_IMAGE_ID  = 'main_image_id';
+    const ATTR_CREATED_AT     = 'created_at';
+    const ATTR_DURATION       = 'duration';
+    const ATTR_VIDEO_URL      = 'video_url';
+    const ATTR_PORTIONS_COUNT = 'portions_count';
 
     /**
      * @inheritDoc

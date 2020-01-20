@@ -33,6 +33,9 @@ class Receipt {
     /** @var int */
     public $duration;
 
+    /** @var int  */
+    public $portionsCount;
+
     /** @var string */
     public $videoUrl;
 

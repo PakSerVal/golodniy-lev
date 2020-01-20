@@ -22,7 +22,7 @@ use yii\helpers\Url;
 <h3>Редактирование рецепта</h3>
 <?php $htmlForm = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
     <?= $htmlForm->field($form, $form::ATTR_TITLE) ?>
-    <?= $htmlForm->field($form, $form::ATTR_DESCRIPTION)->textarea() ?>
+    <?= $htmlForm->field($form, $form::ATTR_DESCRIPTION)->textarea(['style' => 'height: 200px'])?>
 
     <div class="receipt-steps">
         <label>Шаги</label>
@@ -42,6 +42,7 @@ use yii\helpers\Url;
 
     <?= $htmlForm->field($form, $form::ATTR_IMAGE)->widget(ImageInput::class) ?>
     <?= $htmlForm->field($form, $form::ATTR_DURATION) ?>
+    <?= $htmlForm->field($form, $form::ATTR_PORTIONS_COUNT) ?>
     <?= $htmlForm->field($form, $form::ATTR_VIDEO_URL) ?>
 
     <div class="receipt-ingredients">

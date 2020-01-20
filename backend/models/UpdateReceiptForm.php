@@ -45,6 +45,10 @@ class UpdateReceiptForm extends Model {
     const ATTR_DURATION = 'duration';
 
     /** @var string */
+    public $portionsCount;
+    const ATTR_PORTIONS_COUNT = 'portionsCount';
+
+    /** @var string */
     public $videoUrl;
     const ATTR_VIDEO_URL = 'videoUrl';
 
@@ -69,12 +73,13 @@ class UpdateReceiptForm extends Model {
      * @author Pak Sergey
      */
     public function __construct(Receipt $receipt, $config = []) {
-        $this->receiptId   = $receipt->id;
-        $this->title       = $receipt->title;
-        $this->description = $receipt->description;
-        $this->image       = $receipt->main_image_id;
-        $this->duration    = $receipt->duration;
-        $this->videoUrl    = $receipt->video_url;
+        $this->receiptId     = $receipt->id;
+        $this->title         = $receipt->title;
+        $this->description   = $receipt->description;
+        $this->image         = $receipt->main_image_id;
+        $this->duration      = $receipt->duration;
+        $this->portionsCount = $receipt->portions_count;
+        $this->videoUrl      = $receipt->video_url;
 
         $this->steps   = ReceiptStep::find()
             ->where([ReceiptStep::ATTR_RECEIPT_ID => $receipt->id])
@@ -105,14 +110,16 @@ class UpdateReceiptForm extends Model {
      */
     public function rules() {
         return [
-            [static::ATTR_TITLE,       RequiredValidator    ::class],
-            [static::ATTR_TITLE,       StringValidator      ::class],
-            [static::ATTR_DESCRIPTION, StringValidator      ::class],
-            [static::ATTR_DURATION,    RequiredValidator    ::class],
-            [static::ATTR_DURATION,    IntValValidator      ::class],
-            [static::ATTR_VIDEO_URL,   StringValidator      ::class],
-            [static::ATTR_TITLE,       StringValidator      ::class],
-            [static::ATTR_IMAGE,       ImageUploadValidator ::class],
+            [static::ATTR_TITLE,          RequiredValidator    ::class],
+            [static::ATTR_TITLE,          StringValidator      ::class],
+            [static::ATTR_DESCRIPTION,    StringValidator      ::class],
+            [static::ATTR_DURATION,       RequiredValidator    ::class],
+            [static::ATTR_DURATION,       IntValValidator      ::class],
+            [static::ATTR_PORTIONS_COUNT, RequiredValidator    ::class],
+            [static::ATTR_PORTIONS_COUNT, IntValValidator      ::class],
+            [static::ATTR_VIDEO_URL,      StringValidator      ::class],
+            [static::ATTR_TITLE,          StringValidator      ::class],
+            [static::ATTR_IMAGE,          ImageUploadValidator ::class],
         ];
     }
 
@@ -123,11 +130,12 @@ class UpdateReceiptForm extends Model {
      */
     public function attributeLabels() {
         return [
-            static::ATTR_TITLE       => 'Заголовок',
-            static::ATTR_DESCRIPTION => 'Описание',
-            static::ATTR_DURATION    => 'Время приготовления в минутах',
-            static::ATTR_STEPS       => 'Шаги',
-            static::ATTR_IMAGE       => 'Изображение',
+            static::ATTR_TITLE          => 'Заголовок',
+            static::ATTR_DESCRIPTION    => 'Описание',
+            static::ATTR_DURATION       => 'Время приготовления в минутах',
+            static::ATTR_PORTIONS_COUNT => 'Количество порций',
+            static::ATTR_STEPS          => 'Шаги',
+            static::ATTR_IMAGE          => 'Изображение',
         ];
     }
 
@@ -143,11 +151,12 @@ class UpdateReceiptForm extends Model {
             return false;
         }
 
-        $this->model->title         = $this->title;
-        $this->model->description   = $this->description;
-        $this->model->main_image_id = $this->image;
-        $this->model->duration      = $this->duration;
-        $this->model->video_url     = $this->videoUrl;
+        $this->model->title          = $this->title;
+        $this->model->description    = $this->description;
+        $this->model->main_image_id  = $this->image;
+        $this->model->duration       = $this->duration;
+        $this->model->portions_count = $this->portionsCount;
+        $this->model->video_url      = $this->videoUrl;
 
         return $this->model->save();
     }

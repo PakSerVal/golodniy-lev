@@ -402,6 +402,9 @@ footer {
   .receipt-card__duration {
     font-style: italic;
     margin-bottom: 10px; }
+  .receipt-card__portions-count {
+    font-style: italic;
+    margin-bottom: 10px; }
   .receipt-card .step {
     font-style: italic;
     margin-bottom: 20px; }

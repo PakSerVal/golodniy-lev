@@ -43,13 +43,18 @@ $this->registerMetaTag(['Keywords' => implode(',', ArrayHelper::getColumn($recei
         <div class="receipt-card__ingredients">
             <h2 class="receipt-card__ingredients-title">Ингредиенты</h2>
             <?php foreach ($receipt->ingredients as $ingredient): ?>
-                <div class="ingredient"><?= ucfirst($ingredient->title) ?> - <?= $ingredient->count ?> <?= $ingredient->measureUnit ?></div>
+                <div class="ingredient">
+                    <?= ucfirst($ingredient->title) ?> - <?= ($ingredient->count !== '0') ? $ingredient->count : null ?> <?= $ingredient->measureUnit ?>
+                </div>
             <?php endforeach; ?>
         </div>
         <div class="receipt-card__instruction">
             <h2 class="receipt-card__instruction-title">Инструкция по приготовлению</h2>
             <div class="receipt-card__duration">
                 Время приготовления: <?= StringHelper::countPostfix($receipt->duration, ['минута', 'минуты', 'минут']) ?>
+            </div>
+            <div class="receipt-card__portions-count">
+                Количество порций: <?= $receipt->portionsCount ?> шт.
             </div>
             <?php foreach ($receipt->steps as $i => $step): ?>
                 <div class="step">

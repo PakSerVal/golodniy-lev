@@ -52,7 +52,7 @@ class ReceiptsStepsInput extends Widget {
         $result .= '
             <div class="steps-input-wrapper">
                 <div class="form-group input-element" data-role="step-template" hidden>
-                    <textarea name="' . ReceiptStepsForm::ATTR_STEP_CONTENTS . '[]" class="form-control"></textarea>
+                    <textarea style="height: 200px" name="' . ReceiptStepsForm::ATTR_STEP_CONTENTS . '[]" class="form-control"></textarea>
                     <br>
                     <div style="display: flex; justify-content: space-between;">
                         ' . Html::fileInput(ReceiptStepsForm::ATTR_STEP_IMAGES . '[]', null) . '

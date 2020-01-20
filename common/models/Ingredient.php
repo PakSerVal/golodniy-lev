@@ -20,12 +20,16 @@ class Ingredient extends ActiveRecord {
     const ATTR_TITLE = 'title';
 
     const MEASURE_UNITS_VARIANTS = [
-        'г.',
+        'гр.',
         'мг.',
+        'кг',
         'л.',
         'мл.',
         'шт.',
         'по вкусу',
-        'ст. л.'
+        'ст.',
+        'ст. л.',
+        'зуб',
+        'пуч.',
     ];
 }
