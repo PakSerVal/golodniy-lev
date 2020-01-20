@@ -21,6 +21,9 @@ Thumbs.db
 # static dir
 /static
 
+# dis dir
+/frontend/web/dist
+
 # composer itself is not needed
 composer.phar
 
