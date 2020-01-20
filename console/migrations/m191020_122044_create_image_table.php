@@ -14,8 +14,8 @@ class m191020_122044_create_image_table extends Migration {
     public function safeUp() {
         $this->createTable($this->tableName, [
             'id'   => $this->primaryKey(),
-            'name' => $this->string(20)->null(),
-            'path' => $this->string(40)->notNull(),
+            'name' => $this->text()->null(),
+            'path' => $this->text()->notNull(),
         ]);
     }
 

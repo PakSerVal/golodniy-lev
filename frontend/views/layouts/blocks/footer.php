@@ -1,3 +1,3 @@
 <footer>
-<!--    Футер-->
+    developed by pakman
 </footer>

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace frontend\dto;
 
+use common\models\Tag;
+
 /**
  * Receipt dto.
  *
@@ -16,17 +18,23 @@ class Receipt {
     /** @var string Title */
     public $title;
 
-    /** @var string Content */
-    public $content;
+    /** @var string Description */
+    public $description;
 
     /** @var string Image url */
     public $imageUrl;
 
-    /** @var int */
-    public $ingredientsCount;
+    /** @var ReceiptIngredient[] */
+    public $ingredients;
+
+    /** @var ReceiptStep[] */
+    public $steps;
 
     /** @var int */
     public $duration;
+
+    /** @var string */
+    public $videoUrl;
 
     /** @var Tag[] */
     public $tags = [];

@@ -1,7 +1,7 @@
 <?php
+
 use common\models\Receipt;
 use yii\helpers\Html;
-use yii\helpers\StringHelper;
 use yii\helpers\Url;
 
 /**
@@ -25,7 +25,7 @@ use yii\helpers\Url;
             <td>
                 <?= $receipt->title ?>
             </td>
-            <td><?= Html::img($receipt->getImageUrl(), ['style' => 'max-height: 300px']) ?></td>
+            <td><?= Html::img($receipt->getImageUrl(), ['style' => 'max-height: 300px; max-width: 300px;']) ?></td>
             <td>
                 <a href="<?= Url::toRoute(['/receipts/edit', $receipt::ATTR_ID => $receipt->id]) ?>" class="btn btn-primary">Редактировать</a>
                 <a

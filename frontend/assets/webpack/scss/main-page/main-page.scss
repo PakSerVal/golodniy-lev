@@ -13,6 +13,18 @@
 
 .about {
   max-width:  500px;
-  margin:     30px auto auto;
+  margin:     20px auto 30px;
   text-align: center;
+
+  &__title {
+    margin: 0;
+  }
+
+  @include respond-to(phone) {
+    margin-top: 10px;
+
+    &__title {
+      font-size: 20px;
+    }
+  }
 }

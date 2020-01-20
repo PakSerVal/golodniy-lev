@@ -9,7 +9,7 @@ use frontend\widgets\MainPageReceipts;
 <section>
     <div class="about">
         <h2 class="about__title">Обо мне</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet iure minus nemo repellendus, repudiandae similique vel voluptates? A aliquam architecto deserunt dolor dolores laboriosam mollitia nemo quibusdam, repudiandae vel vitae.</p>
+        <p>Всем привет!!! Я Лев и я люблю готовить. Это мой личный сайт. Здесь вы найдёте все мои рецепты. Всю жизнь готовлю. Профессиональный повар с 30-летним стажем, блогер и просто крутой чувак</p>
     </div>
 </section>
 <section>

@@ -9,6 +9,8 @@ use yii\web\View;
 
 AppAsset::register($this);
 
+$this->registerMetaTag(['description' => 'Всем привет!!! Я Лев и я люблю готовить. Это мой личный сайт. Здесь вы найдёте все мои рецепты. Всю жизнь готовлю. Профессиональный повар с 30 - летним стажем, блогер и просто крутой чувак']);
+$this->registerMetaTag(['Keywords' => 'Голодный лев, личный сайт, рецепты'])
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -18,7 +20,7 @@ AppAsset::register($this);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title><?= Html::encode($this->title ?? 'Голодный лев') ?></title>
     <?php $this->head() ?>
 </head>
 <body>

@@ -11,18 +11,22 @@ use yii\db\Expression;
 /**
  * Receipt.
  *
- * @property string $id
+ * @property int    $id
  * @property string $title
- * @property string $content
+ * @property string $description
  * @property string $main_image_id
  * @property string $created_at
+ * @property int    $duration
+ * @property string $video_url
  */
 class Receipt extends ActiveRecord {
     const ATTR_ID            = 'id';
     const ATTR_TITLE         = 'title';
-    const ATTR_CONTENT       = 'content';
+    const ATTR_DESCRIPTION   = 'description';
     const ATTR_MAIN_IMAGE_ID = 'main_image_id';
     const ATTR_CREATED_AT    = 'created_at';
+    const ATTR_DURATION      = 'duration';
+    const ATTR_VIDEO_URL     = 'video_url';
 
     /**
      * @inheritDoc

@@ -15,7 +15,6 @@ class m191020_115511_create_receipt_table extends Migration {
         $this->createTable($this->tableName, [
             'id'            => $this->primaryKey(),
             'title'         => $this->text()->notNull()->comment('Заголовок рецепта'),
-            'content'       => $this->text()->notNull()->comment('Контент'),
             'main_image_id' => $this->integer()->notNull()->comment('Идентификатор основного изображения'),
             'created_at'    => $this->timestamp()->notNull()->defaultExpression("TIMEZONE('UTC', now())")
         ]);

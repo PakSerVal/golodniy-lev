@@ -1,71 +1,71 @@
 <?php
 
+use backend\assets\EditReceiptPage;
 use backend\models\UpdateReceiptForm;
+use backend\widgets\ReceiptIngredientsInput;
+use backend\widgets\ReceiptsStepsInput;
+use backend\widgets\ReceiptTagsInput;
 use common\widgets\ImageInput;
-use dosamigos\tinymce\TinyMce;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
 use yii\helpers\Url;
 
 /**
  * @var UpdateReceiptForm $form
+ *
+ * @author Pak Sergey
  */
 ?>
+
+<?php Yii::$app->view->registerAssetBundle(EditReceiptPage::class) ?>
+
 <h3>Редактирование рецепта</h3>
 <?php $htmlForm = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
     <?= $htmlForm->field($form, $form::ATTR_TITLE) ?>
-    <?= $htmlForm->field($form, $form::ATTR_CONTENT)->widget(TinyMce::class, [
-        'options' => ['rows' => 50],
-        'language' => 'ru',
-        'clientOptions' => [
-            'width' => 1000,
-            'mobile' => ['menubar' => true],
-            'content_style' => 'body { font-family: "Garamond Regular", serif; }',
-            'plugins' => [
-                "advlist autolink lists link charmap print preview anchor",
-                "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table contextmenu paste image"
-            ],
-            'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-            'relative_urls' => false,
-            'remove_script_host' => false,
-            'convert_urls' => true,
-            'images_upload_url' => Url::to('/images/upload'),
-            'images_upload_handler' =>
- <<<JS
-                    (function (blobInfo, success, failure) {
-                        let xhr, formData;
-    
-                        xhr = new XMLHttpRequest();
-                        xhr.withCredentials = true;
-                        xhr.open('POST', '/images/upload');
-    
-                        xhr.onload = function() {
-                            let json;
-    
-                            if (xhr.status != 200) {
-                                failure('HTTP Error: ' + xhr.status);
-                                return;
-                            }
-    
-                            json = JSON.parse(xhr.responseText);
-    
-                            if (!json || typeof json.location != 'string') {
-                                failure('Invalid JSON: ' + xhr.responseText);
-                                return;
-                            }
-    
-                            success(json.location);
-                        };
-    
-                        formData = new FormData();
-                        formData.append('file', blobInfo.blob(), blobInfo.filename());
-    
-                        xhr.send(formData);
-                    })();
-JS
-        ]
-    ]) ?>
-<?= $htmlForm->field($form, $form::ATTR_IMAGE)->widget(ImageInput::class) ?>
-<?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
+    <?= $htmlForm->field($form, $form::ATTR_DESCRIPTION)->textarea() ?>
+
+    <div class="receipt-steps">
+        <label>Шаги</label>
+        <?php foreach ($form->steps as $step): ?>
+            <div class="receipt-step">
+                <div><?= $step->content ?></div>
+                <img src="<?= $step->getImageUrl() ?>" style="max-width: 300px">
+                <?= Html::a('Удалить шаг', Url::toRoute(['/receipt-step/delete', $step::ATTR_ID => $step->id]) , [
+                    'class' => 'btn btn-danger',
+                    'data-role' => 'delete-step-btn'
+                ]) ?>
+            </div>
+        <?php endforeach; ?>
+        <br>
+        <?= ReceiptsStepsInput::widget() ?>
+    </div>
+
+    <?= $htmlForm->field($form, $form::ATTR_IMAGE)->widget(ImageInput::class) ?>
+    <?= $htmlForm->field($form, $form::ATTR_DURATION) ?>
+    <?= $htmlForm->field($form, $form::ATTR_VIDEO_URL) ?>
+
+    <div class="receipt-ingredients">
+        <label>Ингредиенты</label>
+        <?= ReceiptIngredientsInput::draw($form->ingredients) ?>
+    </div>
+    <br>
+
+    <div class="receipt-tags">
+        <label>Тэги</label>
+        <?php foreach ($form->tags as $tag): ?>
+            <div>
+                <span class="receipt-tag">
+                <?= $tag->title ?>
+                <?= Html::a('-', Url::toRoute(['/receipts-tags/delete', 'tagId' => $tag->id, 'receiptId' => $form->receiptId]) , [
+                    'class' => 'btn btn-danger',
+                    'data-role' => 'delete-tag-btn'
+                ]) ?>
+            </span>
+            </div>
+        <?php endforeach; ?>
+        <br>
+        <?= ReceiptTagsInput::widget() ?>
+    </div>
+
+    <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
 <?php ActiveForm::end(); ?>

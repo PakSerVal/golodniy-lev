@@ -14,40 +14,31 @@ use yii\helpers\Url;
  */
 ?>
 
-<div class="receipts-list">
+<div class="container receipts-list">
+    <h1 class="receipts-list__title">Рецепты</h1>
     <?php foreach ($receipts as $receipt): ?>
+        <?php $receiptUrl = Url::toRoute(['receipts/view', 'id' => $receipt->id]) ?>
         <div class="receipt">
-            <a href="<?= Url::toRoute(['receipts/view', 'id' => $receipt->id]) ?>" class="receipt__image">
-                <?= Html::img($receipt->imageUrl) ?>
-            </a>
-            <div class="receipt__wrapper">
-                <div class="receipt__tags">
-                    <?php foreach ($receipt->tags as $tag): ?>
-                        <?= Html::a($tag->title, $tag->url, ['class' => 'link link_tag']) ?>
-                    <?php endforeach; ?>
-                </div>
-                <div class="receipt__title">
-                    <?= Html::a($receipt->title, Url::toRoute(['receipts/view', 'id' => $receipt->id]), ['class' => 'link']) ?>
-                </div>
-                <div class="receipt__stats">
-                    <div class="receipt__ingredients">
-                        <div class="receipt__ingredients-icon">
-                            <?= Html::img('/images/icons/ingredients.svg') ?>
-                        </div>
-                        <div class="receipt__ingredients-text">
-                            <?= StringHelper::countPostfix($receipt->ingredientsCount, ['Ингридиент', 'Ингридиента', 'Ингридиентов']) ?>
-                        </div>
-                    </div>
-                    <div class="receipt__duration">
-                        <div class="receipt__duration-icon">
-                            <?= Html::img('/images/icons/clock.svg') ?>
-                        </div>
-                        <div class="receipt__duration-text">
-                            <?= StringHelper::countPostfix($receipt->duration, ['минута', 'минуты', 'минут']) ?>
-                        </div>
-                    </div>
-                </div>
+            <div class="receipt__image">
+                <a href="<?= $receiptUrl ?>"><?= Html::img($receipt->imageUrl) ?></a>
             </div>
+            <div class="receipt__title">
+                <?= Html::a($receipt->title, $receiptUrl, ['class' => 'link']) ?>
+            </div>
+            <div class="receipt__description">
+                <?= StringHelper::truncate($receipt->description, 140) ?>
+            </div>
+            <div class="receipt__tags">
+                <?php foreach ($receipt->tags as $i => $tag): ?>
+                    <?= Html::a($tag->title, '', ['class' => 'link receipt__tag']) ?>
+                    <?php if(count($receipt->tags) - 1 !== $i): ?>
+                        <div class="receipt__dot-wrapper">
+                            <span class="receipt__dot"></span>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+            <a href="<?= $receiptUrl ?>"><button class="receipt__button">Посмотреть рецепт</button></a>
         </div>
     <?php endforeach; ?>
 </div>

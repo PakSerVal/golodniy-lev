@@ -1,5 +1,6 @@
 <?php
 
+use common\helpers\StringHelper;
 use frontend\dto\Receipt;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -13,17 +14,28 @@ use yii\helpers\Url;
  */
 ?>
 <h2 class="main-page-receipts-title">Мои рецепты</h2>
-<div class="main-page-receipts">
+<div class="container main-page-receipts">
     <?php foreach ($receipts as $receipt): ?>
         <div class="main-page-receipt">
-            <div class="main-page-receipt__image" style="background-image: url('<?= $receipt->imageUrl ?>')">
-                <a href="<?= Url::toRoute(['receipts/view', 'id' => $receipt->id]) ?>" class="main-page-receipt__title">
-                    <p><?= $receipt->title ?></p>
+            <div class="main-page-receipt__wrapper">
+                <a href="<?= Url::toRoute(['receipts/view', 'id' => $receipt->id]) ?>">
+                    <div class="main-page-receipt__image">
+                        <?= Html::img($receipt->imageUrl, ['alt' => $receipt->title]) ?>
+                    </div>
+                    <div class="main-page-receipt__title">
+                        <?= $receipt->title ?>
+                    </div>
+                    <div class="main-page-receipt__description">
+                        <?= StringHelper::truncate($receipt->description, 180) ?>
+                    </div>
+                    <div class="main-page-receipt__button-wrapper">
+                        <button class="main-page-receipt__button">Посмотреть рецепт</button>
+                    </div>
                 </a>
             </div>
         </div>
     <?php endforeach; ?>
     <div class="main-page-receipts__button">
-        <?= Html::a('Ещё рецепты', 'receipts', ['class' => 'animated-link']) ?>
+        <?= Html::a('Все рецепты', 'receipts', ['class' => 'animated-link']) ?>
     </div>
 </div>

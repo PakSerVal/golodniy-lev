@@ -5,7 +5,13 @@ declare(strict_types=1);
 namespace backend\models;
 
 use common\helpers\validators\ImageUploadValidator;
+use common\helpers\validators\IntValValidator;
+use common\models\Ingredient;
 use common\models\Receipt;
+use common\models\ReceiptIngredient;
+use common\models\ReceiptStep;
+use common\models\ReceiptTag;
+use common\models\Tag;
 use yii\base\Model;
 use yii\validators\RequiredValidator;
 use yii\validators\StringValidator;
@@ -19,16 +25,40 @@ use yii\web\UploadedFile;
 class UpdateReceiptForm extends Model {
 
     /** @var string */
+    public $receiptId;
+    const ATTR_RECEIPT_ID = 'receiptId';
+
+    /** @var string */
     public $title;
     const ATTR_TITLE = 'title';
 
     /** @var string */
-    public $content;
-    const ATTR_CONTENT = 'content';
+    public $description;
+    const ATTR_DESCRIPTION = 'description';
 
     /** @var UploadedFile */
     public $image;
     const ATTR_IMAGE = 'image';
+
+    /** @var int */
+    public $duration;
+    const ATTR_DURATION = 'duration';
+
+    /** @var string */
+    public $videoUrl;
+    const ATTR_VIDEO_URL = 'videoUrl';
+
+    /** @var ReceiptStep[] */
+    public $steps;
+    const ATTR_STEPS = 'steps';
+
+    /** @var Tag[] */
+    public $tags;
+    const ATTR_TAGS = 'tags';
+
+    /** @var ReceiptIngredient[] */
+    public $ingredients;
+    const ATTR_INGREDIENTS = 'ingredients';
 
     /** @var Receipt $model */
     private $model;
@@ -39,9 +69,29 @@ class UpdateReceiptForm extends Model {
      * @author Pak Sergey
      */
     public function __construct(Receipt $receipt, $config = []) {
-        $this->title   = $receipt->title;
-        $this->content = $receipt->content;
-        $this->image   = $receipt->main_image_id;
+        $this->receiptId   = $receipt->id;
+        $this->title       = $receipt->title;
+        $this->description = $receipt->description;
+        $this->image       = $receipt->main_image_id;
+        $this->duration    = $receipt->duration;
+        $this->videoUrl    = $receipt->video_url;
+
+        $this->steps   = ReceiptStep::find()
+            ->where([ReceiptStep::ATTR_RECEIPT_ID => $receipt->id])
+            ->orderBy(ReceiptStep::ATTR_NUMBER)
+            ->all();
+        ;
+
+        $this->ingredients = ReceiptIngredient::find()
+            ->where([ReceiptIngredient::ATTR_RECEIPT_ID => $receipt->id])
+            ->all();
+        ;
+
+        $this->tags = Tag::find()
+            ->innerJoin(ReceiptTag::tableName(), Tag::tableName() . '.' . Tag::ATTR_ID . '=' . ReceiptTag::tableName() . '.' . ReceiptTag::ATTR_TAG_ID)
+            ->where([ReceiptTag::ATTR_RECEIPT_ID => $receipt->id])
+            ->all()
+        ;
 
         $this->model = $receipt;
 
@@ -55,11 +105,14 @@ class UpdateReceiptForm extends Model {
      */
     public function rules() {
         return [
-            [static::ATTR_TITLE,   RequiredValidator    ::class],
-            [static::ATTR_TITLE,   StringValidator      ::class],
-            [static::ATTR_CONTENT, RequiredValidator    ::class],
-            [static::ATTR_CONTENT, StringValidator      ::class],
-            [static::ATTR_IMAGE,   ImageUploadValidator ::class],
+            [static::ATTR_TITLE,       RequiredValidator    ::class],
+            [static::ATTR_TITLE,       StringValidator      ::class],
+            [static::ATTR_DESCRIPTION, StringValidator      ::class],
+            [static::ATTR_DURATION,    RequiredValidator    ::class],
+            [static::ATTR_DURATION,    IntValValidator      ::class],
+            [static::ATTR_VIDEO_URL,   StringValidator      ::class],
+            [static::ATTR_TITLE,       StringValidator      ::class],
+            [static::ATTR_IMAGE,       ImageUploadValidator ::class],
         ];
     }
 
@@ -70,9 +123,11 @@ class UpdateReceiptForm extends Model {
      */
     public function attributeLabels() {
         return [
-            static::ATTR_TITLE   => 'Заголовок',
-            static::ATTR_CONTENT => 'Контент',
-            static::ATTR_IMAGE   => 'Изображение',
+            static::ATTR_TITLE       => 'Заголовок',
+            static::ATTR_DESCRIPTION => 'Описание',
+            static::ATTR_DURATION    => 'Время приготовления в минутах',
+            static::ATTR_STEPS       => 'Шаги',
+            static::ATTR_IMAGE       => 'Изображение',
         ];
     }
 
@@ -89,8 +144,10 @@ class UpdateReceiptForm extends Model {
         }
 
         $this->model->title         = $this->title;
-        $this->model->content       = $this->content;
+        $this->model->description   = $this->description;
         $this->model->main_image_id = $this->image;
+        $this->model->duration      = $this->duration;
+        $this->model->video_url     = $this->videoUrl;
 
         return $this->model->save();
     }

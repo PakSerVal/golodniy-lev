@@ -9,11 +9,11 @@ use yii\web\UploadedFile;
 class ImageService {
 
     /**
-     * @param string $id Image id
+     * @param int $id Image id
      *
      * @return string|null
      */
-    public function getImageUrl(string $id): ?string {
+    public function getImageUrl(int $id): ?string {
         $model = Image::findOne([Image::ATTR_ID => $id]);
 
         if (null === $model) {
