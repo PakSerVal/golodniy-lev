@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace frontend\dto;
 
 use common\models\Tag;
+use DateTime;
 
 /**
  * Receipt dto.
@@ -20,6 +21,9 @@ class Receipt {
 
     /** @var string Description */
     public $description;
+
+    /** @var DateTime Description */
+    public $date;
 
     /** @var string Image url */
     public $imageUrl;

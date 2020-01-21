@@ -1,8 +1,10 @@
 footer {
-  height:           20px;
+  display:          flex;
+  flex-direction:   column;
+  justify-content:  space-evenly;
+  height:           135px;
   color:            #fff;
-  background-color: #494949;
-  margin-top:       30px;
-  text-align:       right;
+  background-color: #242424;
+  text-align:       center;
   padding-right:    15px;
 }

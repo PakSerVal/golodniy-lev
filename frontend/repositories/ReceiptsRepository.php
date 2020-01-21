@@ -8,6 +8,7 @@ use common\models\ReceiptIngredient;
 use common\models\ReceiptStep;
 use common\models\ReceiptTag;
 use common\models\Tag;
+use DateTime;
 use frontend\dto\Receipt as ReceiptDTO;
 use frontend\dto\ReceiptIngredient as ReceiptIngredientDTO;
 use frontend\dto\ReceiptStep as ReceiptStepDTO;
@@ -42,6 +43,7 @@ class ReceiptsRepository {
             $receiptDTO->id            = $receipt->id;
             $receiptDTO->title         = $receipt->title;
             $receiptDTO->description   = $receipt->description;
+            $receiptDTO->date          = new DateTime($receipt->created_at);
             $receiptDTO->duration      = $receipt->duration;
             $receiptDTO->portionsCount = $receipt->portions_count;
             $receiptDTO->videoUrl      = $receipt->video_url;
@@ -76,6 +78,7 @@ class ReceiptsRepository {
         $result->id            = $source->id;
         $result->title         = $source->title;
         $result->description   = $source->description;
+        $result->date          = new DateTime($source->created_at);
         $result->imageUrl      = $source->getImageUrl();
         $result->duration      = $source->duration;
         $result->portionsCount = $source->portions_count;

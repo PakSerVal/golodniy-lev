@@ -12,21 +12,26 @@ namespace common\helpers;
 class StringHelper extends \yii\helpers\StringHelper {
 
     /**
-     * @param int    $count
-     * @param array  $cases
+     * @param int   $count
+     * @param array $cases
+     * @param bool  $withDigits
      *
      * @return string
      *
      * @author Pak Sergey
      */
-    public static function countPostfix(int $count, array $cases): string {
+    public static function countPostfix(int $count, array $cases, bool $withDigits = true): string {
         $countString = preg_replace('/[^\d]+/', '', $count);// Удаляем всё, кроме чисел
 
         // -- -- -- --
         $caseIndex = self::getCountPostfixForm((int)$countString);
         $result    = $cases[$caseIndex];
 
-        return $count . ' ' . $result;
+        if ($withDigits) {
+            $result = $count . ' ' . $result;
+        }
+
+        return $result;
     }
 
     /**
