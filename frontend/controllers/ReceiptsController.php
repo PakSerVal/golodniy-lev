@@ -42,7 +42,7 @@ class ReceiptsController extends Controller {
 
         $tagTitle = null;
         if (null !== $tag) {
-            $tagTitle = Tag::find()->select(Tag::ATTR_TITLE)->scalar();
+            $tagTitle = Tag::find()->select(Tag::ATTR_TITLE)->where([Tag::ATTR_ID => $tag])->scalar();
 
             if (false === $tagTitle) {
                 $tagTitle = null;
