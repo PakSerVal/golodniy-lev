@@ -27,6 +27,10 @@ class IngredientController extends BackendController {
             throw new BadRequestHttpException('Неверные входные параметры');
         }
 
+        if (null !== Ingredient::findOne([Ingredient::ATTR_TITLE => $title])) {
+            throw new BadRequestHttpException('Такой ингредиент уже есть');
+        }
+
         $model        = new Ingredient();
         $model->title = strtolower($title);
 

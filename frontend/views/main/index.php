@@ -1,22 +1,48 @@
 <?php
 
 use common\helpers\StringHelper;
+use frontend\assets\IdealImageSliderAsset;
 use frontend\widgets\MainPageReceipts;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
 /**
  * Main page.
+ *
+ * @author Pak Sergey
  */
+
+IdealImageSliderAsset::register($this);
+
+$this->registerMetaTag(['name' => 'description', 'content' => 'Готовлю простые, вкусные и быстрые блюда по рецептам, доступным каждому.']);
+$this->registerMetaTag(['name' => 'keywords', 'content' => 'Голодный лев, личный сайт, рецепты'])
 ?>
-<section class="carousel">
-    <div class="carousel__receipts">
-        <div class="carousel__receipts-wrapper">
-            <div class="carousel__receipts-title">ПОЛНЫЙ СПИСОК РЕЦЕПТОВ</div>
-            <a class="carousel__receipts-btn" href="<?= Url::toRoute(['/receipts']) ?>">ПЕРЕЙТИ</a>
+<section id="slider">
+    <img data-src="/images/slider-receipts.png" alt="" data-caption="#slider-receipts-caption">
+    <img data-src="/images/slider-healthy-food.png" alt="" data-caption="#slider-healthy-food-caption">
+    <img data-src="/images/slider-popular.png" alt="" data-caption="#slider-popular-caption">
+</section>
+<div style="display: none">
+    <div id="slider-receipts-caption">
+        <div class="caption">
+            <h3 class="caption__title">ПОЛНЫЙ СПИСОК РЕЦЕПТОВ</h3>
+            <a class="caption__button link" href="<?= Url::toRoute(['/receipts']) ?>">ПЕРЕЙТИ</a>
         </div>
     </div>
-</section>
+    <div id="slider-healthy-food-caption">
+        <div class="caption">
+            <h3 class="caption__title">ПРАВИЛЬНОЕ ПИТАНИЕ</h3>
+            <a class="caption__button" href="<?= Url::toRoute(['/receipts']) ?>">ПЕРЕЙТИ</a>
+        </div>
+    </div>
+    <div id="slider-popular-caption">
+        <div class="caption">
+            <h3 class="caption__title">ПОПУЛЯРНЫЕ РЕЦЕПТЫ</h3>
+            <a class="caption__button" href="<?= Url::toRoute(['/receipts']) ?>">ПЕРЕЙТИ</a>
+        </div>
+    </div>
+</div>
+
 <section>
     <?= MainPageReceipts::widget() ?>
 </section>

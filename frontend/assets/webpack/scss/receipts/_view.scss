@@ -1,16 +1,15 @@
 .receipt-card {
-  max-width:        1300px;
+  max-width:        1200px;
   margin:           auto;
   background-color: white;
 
   &__title {
     margin:      0;
-    padding:     30px 0;
+    padding:     30px 0 0;
     text-align:  center;
     font-weight: normal;
 
     @include respond-to(phone) {
-      padding:   10px 0;
       font-size: 22px;
     }
   }
@@ -60,6 +59,45 @@
 
     @include respond-to(phone) {
       flex-direction: column;
+    }
+  }
+
+  &__stats {
+    margin-bottom:   20px;
+    display:         flex;
+    justify-content: space-between;
+    align-items:     center;
+    border-top:      1px solid;
+  }
+
+  &__date-views-wrapper {
+    display: flex;
+  }
+
+  &__date {
+    display:      flex;
+    align-items:  center;
+    margin-right: 10px;
+
+    i {
+      background-image: url('/images/icons/calendar.png');
+      width:            16px;
+      height:           16px;
+      background-size:  contain;
+      margin-right:     4px;
+    }
+  }
+
+  &__views-count {
+    display:     flex;
+    align-items: center;
+
+    i {
+      background-image: url('/images/icons/eye.png');
+      width:            18px;
+      height:           18px;
+      background-size:  contain;
+      margin-right:     4px;
     }
   }
 
@@ -133,11 +171,19 @@
   }
 
   &__video {
+    margin:     20px 0;
     text-align: center;
 
     iframe {
-      width:  560px;
-      height: 315px;
+      width:  100%;
+      height: 670px;
+    }
+
+    @include respond-to(tablet) {
+      iframe {
+        width:  100%;
+        height: 430px;
+      }
     }
 
     @include respond-to(phone) {

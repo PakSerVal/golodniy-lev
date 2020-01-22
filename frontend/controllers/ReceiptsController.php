@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace frontend\controllers;
 
+use common\models\Tag;
 use frontend\repositories\ReceiptsRepository;
+use yii\data\Pagination;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 
@@ -25,14 +27,29 @@ class ReceiptsController extends Controller {
     }
 
     /**
+     * @param int|null $tag
+     *
      * @return mixed
      *
      * @author Pak Sergey
      */
-    public function actionIndex() {
-        $receipts = $this->repository->getAll();
+    public function actionIndex(int $tag = null) {
+        $totalCount = (null === $tag ? $this->repository->getTotalCount() : $this->repository->getTotalCountByTag($tag));
 
-        return $this->render($this->action->id, compact('receipts'));
+        $pages = new Pagination(['totalCount' => $totalCount]);
+
+        $receipts = (null === $tag ? $this->repository->getAll($pages->limit, $pages->offset) :  $this->repository->getAllByTag($tag, $pages->limit, $pages->offset));
+
+        $tagTitle = null;
+        if (null !== $tag) {
+            $tagTitle = Tag::find()->select(Tag::ATTR_TITLE)->scalar();
+
+            if (false === $tagTitle) {
+                $tagTitle = null;
+            }
+        }
+
+        return $this->render($this->action->id, compact('receipts', 'pages', 'tagTitle'));
     }
 
     /**

@@ -22,14 +22,15 @@ class Ingredient extends ActiveRecord {
     const MEASURE_UNITS_VARIANTS = [
         'гр.',
         'мг.',
-        'кг',
+        'кг.',
         'л.',
         'мл.',
         'шт.',
         'по вкусу',
         'ст.',
         'ст. л.',
-        'зуб',
+        'ч. л.',
+        'зуб.',
         'пуч.',
     ];
 }

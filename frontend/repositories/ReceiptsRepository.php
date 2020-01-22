@@ -24,17 +24,59 @@ class ReceiptsRepository {
      * Get all receipts.
      *
      * @param int $limit
+     * @param int $offset
      *
      * @return ReceiptDTO[]
      *
      * @author Pak Sergey
      */
-    public function getAll(int $limit = 20): array {
+    public function getAll(int $limit = 20, int $offset = 0): array {
         $receipts = Receipt::find()
             ->limit($limit)
-            ->orderBy(Receipt::ATTR_CREATED_AT)
+            ->offset($offset)
+            ->orderBy([Receipt::ATTR_CREATED_AT => SORT_DESC])
             ->all()
         ;/** @var Receipt[] $receipts */
+
+        $result = [];
+
+        foreach ($receipts as $receipt) {
+            $receiptDTO                = new ReceiptDTO();
+            $receiptDTO->id            = $receipt->id;
+            $receiptDTO->title         = $receipt->title;
+            $receiptDTO->description   = $receipt->description;
+            $receiptDTO->date          = new DateTime($receipt->created_at);
+            $receiptDTO->duration      = $receipt->duration;
+            $receiptDTO->portionsCount = $receipt->portions_count;
+            $receiptDTO->videoUrl      = $receipt->video_url;
+            $receiptDTO->imageUrl      = $receipt->getImageUrl();
+            $receiptDTO->steps         = $this->getReceiptSteps($receipt->id);
+            $receiptDTO->ingredients   = $this->getReceiptIngredients($receipt->id);
+            $receiptDTO->tags          = $this->getReceiptTags($receipt->id);
+
+            $result[] = $receiptDTO;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Получение рецептов с учетом тэга.
+     *
+     * @param int $tagId
+     * @param int $limit
+     * @param int $offset
+     *
+     * @return ReceiptDTO[]
+     *
+     * @author Pak Sergey
+     */
+    public function getAllByTag(int $tagId, int $limit = 20, int $offset = 0): array {
+        $receipts = Receipt::find()
+            ->innerJoin(ReceiptTag::tableName(), ReceiptTag::tableName() . '.' . ReceiptTag::ATTR_RECEIPT_ID . '=' . Receipt::tableName() . '.' . Receipt::ATTR_ID)
+            ->where([ReceiptTag::ATTR_TAG_ID => $tagId])
+            ->all()
+        ; /** @var Receipt[] $receipts */
 
         $result = [];
 
@@ -88,6 +130,30 @@ class ReceiptsRepository {
         $result->tags          = $this->getReceiptTags($id);
 
         return $result;
+    }
+
+    /**
+     * Получение общего количества рецптов.
+     *
+     * @return int
+     *
+     * @author Pak Sergey
+     */
+    public function getTotalCount(): int {
+        return Receipt::find()->count();
+    }
+
+    /**
+     * Получение общего количества рецептов с учетом тэга.
+     *
+     * @param int $tagId
+     *
+     * @return int
+     *
+     * @author Pak Sergey
+     */
+    public function getTotalCountByTag(int $tagId) {
+        return ReceiptTag::find()->where([ReceiptTag::ATTR_TAG_ID => $tagId])->count();
     }
 
     /**

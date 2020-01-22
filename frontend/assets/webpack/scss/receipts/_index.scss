@@ -4,22 +4,30 @@
   margin:    auto;
 
   &__title {
-    font-weight:   normal;
-    width:         100%;
-    text-align:    center;
-    padding:       15px 0;
-    margin:        0 auto 15px;
-    border-bottom: 1px solid black;
+    font-weight: normal;
+    width:       100%;
+    text-align:  center;
+    padding:     15px 0;
+    margin:      0 auto 15px;
+
+    span {
+      text-transform: lowercase;
+    }
+  }
+
+  &__tag {
+    width: 100%;
+    color: #c23d1f;
   }
 
   .receipt {
     display:        flex;
     flex-direction: column;
-    max-width:      calc((100% - 30px) / 3);
+    max-width:      calc((100% - 45px) / 4);
     margin-right:   15px;
     margin-bottom:  40px;
 
-    &:nth-of-type(3n) {
+    &:nth-of-type(4n) {
       margin-right: 0;
     }
 
@@ -60,55 +68,54 @@
     }
 
     &__title {
-      padding:   10px 0;
-      font-size: 23px;
+      min-height:  45px;
+      font-size:   16px;
+      font-weight: bold;
+      text-align:  center;
+
+      @media(max-width: $screen-sm-max) {
+        min-height: auto;
+      }
     }
 
     &__description {
-      font-size: 18px;
-      color:     #6d6d6c;
+      font-size: 14px;
     }
+  }
 
-    &__tags {
-      margin-top: auto;
-      padding:    15px 0;
-    }
+  &__pagination {
+    width: 100%;
 
-    &__tag {
-      text-decoration: underline;
-    }
+    .pagination {
+      display:         flex;
+      padding:         0;
+      justify-content: center;
+      align-items:     center;
 
-    &__dot-wrapper {
-      display:    inline-block;
-      width:      10px;
-      text-align: center;
-    }
+      li {
+        display:    block;
+        width:      25px;
+        height:     23px;
+        text-align: center;
+        border:     1px solid #a09999;
+        margin:     0 5px;
+        padding:    5px;
+        cursor:     pointer;
 
-    &__dot {
-      display:          inline-block;
-      background-color: #6d6d6c;
-      border-radius:    25px;
-      width:            5px;
-      height:           5px;
-      vertical-align:   middle;
-    }
+        a {
+          display:         block;
+          text-decoration: none;
+          color:           #000;
+        }
 
-    &__button {
-      color:            #fff;
-      background-color: #494949;
-      width:            100%;
-      text-align:       center;
-      border:           none;
-      border-radius:    6px;
-      height:           50px;
-      font-size:        19px;
-      cursor:           pointer;
+        &:hover, &.active {
+          background-color: #c23d1f;
 
-      &:hover {
-        background-color: #272727;
+          a {
+            color: #fff;
+          }
+        }
       }
-
-      @include transition(background-color, 0.5s, linear);
     }
   }
 }

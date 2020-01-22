@@ -53,7 +53,7 @@ use yii\helpers\Url;
             </select>
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" name="<?= ReceiptIngredientsForm::ATTR_INGREDIENTS_COUNTS . '[]' ?>" style="width: 40px;" value="0">
+            <input type="text" class="form-control" name="<?= ReceiptIngredientsForm::ATTR_INGREDIENTS_COUNTS . '[]' ?>" style="width: 60px;" value="0">
         </div>
         <div class="form-group">
             <select class="form-control" name="<?= ReceiptIngredientsForm::ATTR_MEASURE_UNITS . '[]' ?>">

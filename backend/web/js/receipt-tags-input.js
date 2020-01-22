@@ -31,7 +31,29 @@
             $suggestWrapper.addClass('hidden');
         };
 
-        $addInput.on('keyup', function(e) {
+        const addTag = () => {
+            const $container = $(document.createElement('div'));
+            const $tag = $(document.createElement('div'));
+            $tag.html('<span class="tag">' + $addInput.val() + '</span>');
+            $container.append($tag);
+            $container.append($clone.clone().val($addInput.val()));
+            $('.input-wrapper').append($container);
+
+            $tag.on('click', () => {
+                $container.remove();
+            });
+
+            $addInput.val('');
+        };
+
+        $addInput.on('keydown', function(e) {
+            if (e.code === 'Enter') {
+                e.preventDefault();
+                addTag();
+
+                return;
+            }
+
             const q = e.target.value;
 
             $.ajax({
@@ -48,20 +70,7 @@
             });
         });
 
-        $addButton.on('click', () => {
-            const $container = $(document.createElement('div'));
-            const $tag = $(document.createElement('div'));
-            $tag.html('<span class="tag">' + $addInput.val() + '</span>');
-            $container.append($tag);
-            $container.append($clone.clone().val($addInput.val()));
-            $('.input-wrapper').append($container);
-
-            $tag.on('click', () => {
-                $container.remove();
-            });
-
-            $addInput.val('');
-        });
+        $addButton.on('click', addTag);
 
         $(document).click(function() {
             closeSuggests();

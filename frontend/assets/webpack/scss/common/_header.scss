@@ -5,6 +5,14 @@
   align-items:     center;
   height:          117px;
 
+  @include respond-to(tablet) {
+    padding: 0 35px;
+  }
+
+  @include respond-to(phone) {
+    justify-content: flex-start;
+  }
+
   &__item {
     margin:     0 30px;
     font-size:  22px;
@@ -34,6 +42,7 @@
     align-items:    center;
     width:          205px;
     height:         149px;
+    z-index:        1000;
 
     img {
       height: 100%;
@@ -44,9 +53,18 @@
       font-size:   24px;
       font-weight: bold;
     }
+
+    @include respond-to(phone) {
+      width:  175px;
+      height: 110px;
+    }
   }
 
   &__title {
     font-size: 21px;
+
+    @include respond-to(phone) {
+      display: none;
+    }
   }
 }

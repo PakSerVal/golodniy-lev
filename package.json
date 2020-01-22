@@ -28,6 +28,7 @@
     "webpack-cli": "^3.3.8"
   },
   "dependencies": {
+    "ideal-image-slider": "^1.5.1",
     "tiny-slider": "^2.9.2"
   }
 }

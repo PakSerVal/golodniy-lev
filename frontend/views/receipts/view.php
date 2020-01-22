@@ -4,40 +4,36 @@ use common\helpers\StringHelper;
 use frontend\dto\Receipt;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\web\View;
 
 /**
  * Receipts.
  *
  * @var Receipt $receipt
+ * @var View    $this
  *
  * @author Pak Sergey
  */
 
-$this->registerMetaTag(['description' => $receipt->description]);
-$this->registerMetaTag(['Keywords' => implode(',', ArrayHelper::getColumn($receipt->tags, 'title'))])
+$this->title = $receipt->title;
+$this->registerMetaTag(['name' => 'description', 'content' => $receipt->description]);
+$this->registerMetaTag(['name' => 'keywords', 'content' => implode(',', ArrayHelper::getColumn($receipt->tags, 'title'))])
 ?>
 
 <div class="receipt-card">
     <h1 class="receipt-card__title"><?= $receipt->title ?></h1>
-    <div class="receipt-card__image">
-        <?= Html::img($receipt->imageUrl, ['alt' => $receipt->title]) ?>
-    </div>
-    <div class="receipt-card__tags">
-        <?php foreach ($receipt->tags as $i => $tag): ?>
-            <?= Html::a($tag->title, '', ['class' => 'link receipt-card__tag']) ?>
-            <?php if(count($receipt->tags) - 1 !== $i): ?>
-                <div class="receipt-card__dot-wrapper">
-                    <span class="receipt-card__dot"></span>
-                </div>
-            <?php endif; ?>
-        <?php endforeach; ?>
-    </div>
     <div class="receipt-card__description"><?= $receipt->description ?></div>
-    <?php if (null !== $receipt->videoUrl): ?>
+    <?php if (null !== $receipt->videoUrl && '' !== $receipt->videoUrl): ?>
         <div class="receipt-card__video">
-            <h2 class="receipt-card__video-title">Видео рецепта</h2>
             <iframe width="560" height="315" src="<?= $receipt->videoUrl ?>"></iframe>
         </div>
+    <?php else: ?>
+        <?php if (null !== $receipt->imageUrl): ?>
+            <div class="receipt-card__image">
+                <?= Html::img($receipt->imageUrl, ['alt' => $receipt->title]) ?>
+            </div>
+        <?php endif; ?>
     <?php endif; ?>
     <div class="receipt-card__content">
         <div class="receipt-card__ingredients">
@@ -68,6 +64,26 @@ $this->registerMetaTag(['Keywords' => implode(',', ArrayHelper::getColumn($recei
                         </div>
                     <?php endif; ?>
                 </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <div class="receipt-card__stats">
+        <div class="receipt-card__date-views-wrapper">
+            <div class="receipt-card__date">
+                <i></i><?= $receipt->date->format('d-m-y') ?>
+            </div>
+            <div class="receipt-card__views-count">
+                <i></i>0
+            </div>
+        </div>
+        <div class="receipt-card__tags">
+            <?php foreach ($receipt->tags as $i => $tag): ?>
+                <?= Html::a($tag->title, Url::toRoute(['/receipts', 'tag' => $tag->id]), ['class' => 'link receipt-card__tag']) ?>
+                <?php if(count($receipt->tags) - 1 !== $i): ?>
+                    <div class="receipt-card__dot-wrapper">
+                        <span class="receipt-card__dot"></span>
+                    </div>
+                <?php endif; ?>
             <?php endforeach; ?>
         </div>
     </div>
