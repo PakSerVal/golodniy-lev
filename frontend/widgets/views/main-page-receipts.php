@@ -14,7 +14,7 @@ use yii\helpers\Url;
  */
 ?>
 <div class="main-page-receipts-title">
-    <?= Html::img('/images/icons/spoon.png', ['alt' => 'spoon']) ?>
+    <?= Html::img('/images/icons/spoon.jpeg', ['alt' => 'spoon']) ?>
 </div>
 <div class="container main-page-receipts">
     <?php foreach ($receipts as $receipt): ?>
