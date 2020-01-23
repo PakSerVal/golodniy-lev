@@ -24,6 +24,8 @@ Thumbs.db
 # dis dir
 /frontend/web/dist
 
+/frontend/web/index.php
+
 # composer itself is not needed
 composer.phar
 
