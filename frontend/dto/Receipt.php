@@ -43,6 +43,9 @@ class Receipt {
     /** @var string */
     public $videoUrl;
 
+    /** @var int */
+    public $viewsCount = 0;
+
     /** @var Tag[] */
     public $tags = [];
 }

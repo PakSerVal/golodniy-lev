@@ -35,7 +35,7 @@ use yii\helpers\Url;
                 </div>
                 <div class="main-page-receipt__stats">
                     <div class="main-page-receipt__date"><i></i><?= $receipt->date->format('d.m.y') ?></div>
-                    <div class="main-page-receipt__views-count"><i></i>0</div>
+                    <div class="main-page-receipt__views-count"><i></i><?= $receipt->viewsCount ?></div>
                 </div>
             </div>
         </div>

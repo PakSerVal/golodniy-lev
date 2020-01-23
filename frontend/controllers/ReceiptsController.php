@@ -6,6 +6,7 @@ namespace frontend\controllers;
 
 use common\models\Tag;
 use frontend\repositories\ReceiptsRepository;
+use frontend\services\ReceiptViewRegister;
 use yii\data\Pagination;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -20,8 +21,12 @@ class ReceiptsController extends Controller {
     /** @var ReceiptsRepository */
     private $repository;
 
-    public function __construct($id, $module, ReceiptsRepository $repository, $config = []) {
-        $this->repository = $repository;
+    /** @var ReceiptViewRegister */
+    private $receiptViewRegister;
+
+    public function __construct($id, $module, ReceiptsRepository $repository, ReceiptViewRegister $receiptViewRegister, $config = []) {
+        $this->repository          = $repository;
+        $this->receiptViewRegister = $receiptViewRegister;
 
         parent::__construct($id, $module, $config);
     }
@@ -65,6 +70,8 @@ class ReceiptsController extends Controller {
         if (null === $receipt) {
             throw new BadRequestHttpException('Неверные данные запроса');
         }
+
+        $this->receiptViewRegister->register($id);
 
         return $this->render($this->action->id, compact('receipt'));
     }

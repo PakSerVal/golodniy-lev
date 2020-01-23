@@ -69,12 +69,8 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => implode(',', ArrayHel
     </div>
     <div class="receipt-card__stats">
         <div class="receipt-card__date-views-wrapper">
-            <div class="receipt-card__date">
-                <i></i><?= $receipt->date->format('d-m-y') ?>
-            </div>
-            <div class="receipt-card__views-count">
-                <i></i>0
-            </div>
+            <div class="receipt-card__date"><i></i><?= $receipt->date->format('d-m-y') ?></div>
+            <div class="receipt-card__views-count"><i></i><?= $receipt->viewsCount ?></div>
         </div>
         <div class="receipt-card__tags">
             <?php foreach ($receipt->tags as $i => $tag): ?>

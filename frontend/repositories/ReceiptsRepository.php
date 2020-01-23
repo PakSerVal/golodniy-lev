@@ -7,6 +7,7 @@ use common\models\Receipt;
 use common\models\ReceiptIngredient;
 use common\models\ReceiptStep;
 use common\models\ReceiptTag;
+use common\models\ReceiptViewsCount;
 use common\models\Tag;
 use DateTime;
 use frontend\dto\Receipt as ReceiptDTO;
@@ -53,6 +54,7 @@ class ReceiptsRepository {
             $receiptDTO->steps         = $this->getReceiptSteps($receipt->id);
             $receiptDTO->ingredients   = $this->getReceiptIngredients($receipt->id);
             $receiptDTO->tags          = $this->getReceiptTags($receipt->id);
+            $receiptDTO->viewsCount    = $this->getViewsCount($receipt->id);
 
             $result[] = $receiptDTO;
         }
@@ -93,6 +95,7 @@ class ReceiptsRepository {
             $receiptDTO->steps         = $this->getReceiptSteps($receipt->id);
             $receiptDTO->ingredients   = $this->getReceiptIngredients($receipt->id);
             $receiptDTO->tags          = $this->getReceiptTags($receipt->id);
+            $receiptDTO->viewsCount    = $this->getViewsCount($receipt->id);
 
             $result[] = $receiptDTO;
         }
@@ -128,6 +131,7 @@ class ReceiptsRepository {
         $result->steps         = $this->getReceiptSteps($id);
         $result->ingredients   = $this->getReceiptIngredients($id);
         $result->tags          = $this->getReceiptTags($id);
+        $result->viewsCount    = $this->getViewsCount($id);
 
         return $result;
     }
@@ -173,6 +177,29 @@ class ReceiptsRepository {
         ;
 
         return $tags;
+    }
+
+    /**
+     * Получение количества просмотров рецепта.
+     *
+     * @param int $id Идентификатор рецепта
+     *
+     * @return int
+     *
+     * @author Pak Sergey
+     */
+    private function getViewsCount(int $id) {
+        $count = ReceiptViewsCount::find()
+            ->select(ReceiptViewsCount::ATTR_COUNT)
+            ->where([ReceiptViewsCount::ATTR_RECEIPT_ID => $id])
+            ->scalar()
+        ;
+
+        if (false === $count) {
+            $count = 0;
+        }
+
+        return $count;
     }
 
     /**
