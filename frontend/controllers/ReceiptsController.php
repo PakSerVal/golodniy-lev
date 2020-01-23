@@ -43,8 +43,6 @@ class ReceiptsController extends Controller {
 
         $pages = new Pagination(['totalCount' => $totalCount]);
 
-        $pages->setPageSize(3);
-
         $receipts = (null === $tag ? $this->repository->getAll($pages->limit, $pages->offset) :  $this->repository->getAllByTag($tag, $pages->limit, $pages->offset));
 
         $tagTitle = null;
