@@ -31,7 +31,7 @@ use yii\helpers\Url;
                     </div>
                 </a>
                 <div class="main-page-receipt__description">
-                    <?= StringHelper::truncate($receipt->description, 120) ?>
+                    <?= StringHelper::truncate($receipt->description, 110) ?>
                 </div>
                 <div class="main-page-receipt__stats">
                     <div class="main-page-receipt__date"><i></i><?= $receipt->date->format('d.m.y') ?></div>

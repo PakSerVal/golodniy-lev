@@ -47,10 +47,11 @@
   }
 
   &__description {
-    color:     #6d6d6c;
-    max-width: 800px;
-    padding:   20px;
-    margin:    auto;
+    text-align: center;
+    color:      #6d6d6c;
+    max-width:  800px;
+    padding:    20px;
+    margin:     auto;
   }
 
   &__content {
@@ -177,6 +178,7 @@
     iframe {
       width:  100%;
       height: 670px;
+      border: none;
     }
 
     @include respond-to(tablet) {

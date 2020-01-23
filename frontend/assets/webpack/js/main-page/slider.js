@@ -13,9 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
         height:             'auto',
         initialHeight:      400,
         minHeight:          null,
-        interval:           4000,
+        interval:           6000,
         transitionDuration: 700,
-        effect:             'slide',
+        effect:             'fade',
     });
     slider.addCaptions();
     slider.start();
