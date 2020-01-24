@@ -34,7 +34,11 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => 'Голодный л�
                 <?= Html::a($receipt->title, $receiptUrl, ['class' => 'link']) ?>
             </div>
             <div class="receipt__description">
-                <?= StringHelper::truncate($receipt->description, 140) ?>
+                <?= StringHelper::truncate($receipt->description, 90) ?>
+            </div>
+            <div class="receipt__stats">
+                <div class="receipt__date"><i></i><?= $receipt->date->format('d.m.y') ?></div>
+                <div class="receipt__views-count"><i></i><?= $receipt->viewsCount ?></div>
             </div>
         </div>
     <?php endforeach; ?>

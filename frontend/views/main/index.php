@@ -1,6 +1,7 @@
 <?php
 
 use common\helpers\StringHelper;
+use common\models\Tag;
 use frontend\assets\IdealImageSliderAsset;
 use frontend\widgets\MainPageReceipts;
 use yii\helpers\Html;
@@ -35,13 +36,13 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => 'Голодный л�
     <div id="slider-healthy-food-caption">
         <div class="caption">
             <h3 class="caption__title">ПРАВИЛЬНОЕ ПИТАНИЕ</h3>
-            <a class="caption__button" href="<?= Url::toRoute(['/receipts']) ?>">ПЕРЕЙТИ</a>
+            <a class="caption__button" href="<?= Url::toRoute(['/receipts', 'tag' => Tag::HEALTHY_FOOD_TAG_ID]) ?>">ПЕРЕЙТИ</a>
         </div>
     </div>
     <div id="slider-popular-caption">
         <div class="caption">
             <h3 class="caption__title">ПОПУЛЯРНЫЕ РЕЦЕПТЫ</h3>
-            <a class="caption__button" href="<?= Url::toRoute(['/receipts']) ?>">ПЕРЕЙТИ</a>
+            <a class="caption__button" href="<?= Url::toRoute(['/receipts/popular']) ?>">ПЕРЕЙТИ</a>
         </div>
     </div>
 </div>

@@ -44,7 +44,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => 'Голодный л�
         </div>
     <?php else: ?>
         <div class="receipts-list__empty-result">
-            <h2>К сожалению по запросу "<?= $tagTitle ?>" ничего не найдено</h2>
+            <h2>К сожалению, по запросу "<?= $tagTitle ?>" ничего не найдено</h2>
             <?= Html::img('/images/error.png', ['alt' => 'error']) ?>
         </div>
     <?php endif; ?>

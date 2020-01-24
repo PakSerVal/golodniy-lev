@@ -58,6 +58,25 @@ class ReceiptsController extends Controller {
     }
 
     /**
+     * Страница популярных рецептов.
+     *
+     * @return mixed
+     *
+     * @author Pak Sergey
+     */
+    public function actionPopular() {
+        $tagTitle = null;
+
+        $totalCount = $this->repository->getTotalCount();
+
+        $pages = new Pagination(['totalCount' => $totalCount]);
+        $receipts = $this->repository->getPopular($pages->limit, $pages->offset);
+
+
+        return $this->render('index', compact('receipts', 'pages', 'tagTitle'));
+    }
+
+    /**
      * @param int $id
      *
      * @return mixed

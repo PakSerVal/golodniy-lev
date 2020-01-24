@@ -139,6 +139,48 @@ class ReceiptsRepository {
     }
 
     /**
+     * Получение попялрных рецептов.
+     *
+     * @param int $limit
+     * @param int $offset
+     *
+     * @return ReceiptDTO[]
+     *
+     * @author Pak Sergey
+     */
+    public function getPopular(int $limit = 20, int $offset = 0): array {
+        $receipts = Receipt::find()
+            ->innerJoin(ReceiptViewsCount::tableName(), ReceiptViewsCount::tableName() . '.' . ReceiptViewsCount::ATTR_RECEIPT_ID . '=' . Receipt::tableName() . '.' . Receipt::ATTR_ID)
+            ->orderBy([ReceiptViewsCount::ATTR_COUNT => SORT_DESC])
+            ->limit($limit)
+            ->offset($offset)
+            ->all()
+        ;/** @var Receipt[] $receipts */
+
+        $result = [];
+
+        foreach ($receipts as $receipt) {
+            $receiptDTO                = new ReceiptDTO();
+            $receiptDTO->id            = $receipt->id;
+            $receiptDTO->title         = $receipt->title;
+            $receiptDTO->description   = $receipt->description;
+            $receiptDTO->date          = new DateTime($receipt->created_at);
+            $receiptDTO->duration      = $receipt->duration;
+            $receiptDTO->portionsCount = $receipt->portions_count;
+            $receiptDTO->videoUrl      = $receipt->video_url;
+            $receiptDTO->imageUrl      = $receipt->getImageUrl();
+            $receiptDTO->steps         = $this->getReceiptSteps($receipt->id);
+            $receiptDTO->ingredients   = $this->getReceiptIngredients($receipt->id);
+            $receiptDTO->tags          = $this->getReceiptTags($receipt->id);
+            $receiptDTO->viewsCount    = $this->getViewsCount($receipt->id);
+
+            $result[] = $receiptDTO;
+        }
+
+        return $result;
+    }
+
+    /**
      * Получение общего количества рецптов.
      *
      * @return int

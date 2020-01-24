@@ -85,7 +85,43 @@
     }
 
     &__description {
-      font-size: 14px;
+      font-size:     14px;
+      margin-bottom: 10px;
+    }
+
+    &__stats {
+      display:     flex;
+      font-size:   14px;
+      color:       #6d6d6c;
+      margin-top:  auto;
+      align-items: center;
+    }
+
+    &__date {
+      display:      flex;
+      align-items:  center;
+      margin-right: 10px;
+
+      i {
+        background-image: url('/images/icons/calendar.png');
+        width:            16px;
+        height:           16px;
+        background-size:  contain;
+        margin-right:     4px;
+      }
+    }
+
+    &__views-count {
+      display:     flex;
+      align-items: center;
+
+      i {
+        background-image: url('/images/icons/eye.png');
+        width:            18px;
+        height:           18px;
+        background-size:  contain;
+        margin-right:     4px;
+      }
     }
   }
 

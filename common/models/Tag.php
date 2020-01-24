@@ -16,6 +16,8 @@ use yii\db\ActiveRecord;
  */
 class Tag extends ActiveRecord {
 
+    const HEALTHY_FOOD_TAG_ID = 39;
+
     const ATTR_ID    = 'id';
     const ATTR_TITLE = 'title';
 }
