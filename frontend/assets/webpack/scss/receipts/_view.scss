@@ -69,10 +69,23 @@
     justify-content: space-between;
     align-items:     center;
     border-top:      1px solid;
+
+    @include respond-to(phone) {
+      flex-wrap: wrap;
+    }
   }
 
   &__date-views-wrapper {
-    display: flex;
+    display:     flex;
+    padding:     15px;
+    flex-basis:  130px;
+    flex-shrink: 0;
+
+    @include respond-to(phone) {
+      flex-basis:      auto;
+      width:           100%;
+      justify-content: center;
+    }
   }
 
   &__date {

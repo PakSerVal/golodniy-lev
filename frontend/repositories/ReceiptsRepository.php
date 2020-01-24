@@ -63,7 +63,7 @@ class ReceiptsRepository {
     }
 
     /**
-     * Получение рецептов с учетом тэга.
+     * Получение рецептов по идентификатору тэга.
      *
      * @param int $tagId
      * @param int $limit
@@ -73,10 +73,12 @@ class ReceiptsRepository {
      *
      * @author Pak Sergey
      */
-    public function getAllByTag(int $tagId, int $limit = 20, int $offset = 0): array {
+    public function getAllByTagId(int $tagId, int $limit = 20, int $offset = 0): array {
         $receipts = Receipt::find()
             ->innerJoin(ReceiptTag::tableName(), ReceiptTag::tableName() . '.' . ReceiptTag::ATTR_RECEIPT_ID . '=' . Receipt::tableName() . '.' . Receipt::ATTR_ID)
             ->where([ReceiptTag::ATTR_TAG_ID => $tagId])
+            ->limit($limit)
+            ->offset($offset)
             ->all()
         ; /** @var Receipt[] $receipts */
 

@@ -20,6 +20,13 @@
     color: #c23d1f;
   }
 
+  &__empty-result {
+    text-align: center;
+    width:      100%;
+    font-size:  25px;
+    padding:    20px;
+  }
+
   .receipt {
     display:        flex;
     flex-direction: column;

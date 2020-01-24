@@ -7,6 +7,7 @@
 // Pages
 @import "main-page/main-page";
 @import "receipts/receipts";
+@import "site-error/site-error";
 
 body {
   height:      100%;
@@ -16,4 +17,8 @@ body {
   font-family: 'Garamond Regular', serif;
   font-size:   16px;
   color:       $base-color;
+
+  main {
+    min-height: calc(100vh - 152px);
+  }
 }

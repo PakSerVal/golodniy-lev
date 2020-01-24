@@ -72,33 +72,33 @@ class UpdateReceiptForm extends Model {
      *
      * @author Pak Sergey
      */
-    public function __construct(Receipt $receipt, $config = []) {
-        $this->receiptId     = $receipt->id;
-        $this->title         = $receipt->title;
-        $this->description   = $receipt->description;
-        $this->image         = $receipt->main_image_id;
-        $this->duration      = $receipt->duration;
-        $this->portionsCount = $receipt->portions_count;
-        $this->videoUrl      = $receipt->video_url;
+    public function __construct(Receipt $ingredient, $config = []) {
+        $this->receiptId     = $ingredient->id;
+        $this->title         = $ingredient->title;
+        $this->description   = $ingredient->description;
+        $this->image         = $ingredient->main_image_id;
+        $this->duration      = $ingredient->duration;
+        $this->portionsCount = $ingredient->portions_count;
+        $this->videoUrl      = $ingredient->video_url;
 
         $this->steps   = ReceiptStep::find()
-            ->where([ReceiptStep::ATTR_RECEIPT_ID => $receipt->id])
+            ->where([ReceiptStep::ATTR_RECEIPT_ID => $ingredient->id])
             ->orderBy(ReceiptStep::ATTR_NUMBER)
             ->all();
         ;
 
         $this->ingredients = ReceiptIngredient::find()
-            ->where([ReceiptIngredient::ATTR_RECEIPT_ID => $receipt->id])
+            ->where([ReceiptIngredient::ATTR_RECEIPT_ID => $ingredient->id])
             ->all();
         ;
 
         $this->tags = Tag::find()
             ->innerJoin(ReceiptTag::tableName(), Tag::tableName() . '.' . Tag::ATTR_ID . '=' . ReceiptTag::tableName() . '.' . ReceiptTag::ATTR_TAG_ID)
-            ->where([ReceiptTag::ATTR_RECEIPT_ID => $receipt->id])
+            ->where([ReceiptTag::ATTR_RECEIPT_ID => $ingredient->id])
             ->all()
         ;
 
-        $this->model = $receipt;
+        $this->model = $ingredient;
 
         parent::__construct($config);
     }

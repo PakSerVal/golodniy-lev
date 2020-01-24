@@ -2,9 +2,7 @@
 
 namespace backend\controllers;
 
-use common\models\ReceiptStep;
 use common\models\ReceiptTag;
-use common\models\Tag;
 use Yii;
 
 /**

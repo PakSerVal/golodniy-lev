@@ -9,6 +9,9 @@ use yii\helpers\Url;
 /**
  * Main page.
  *
+ * @var $youtubeViewsCount
+ * @var $instagramSubsCount
+ *
  * @author Pak Sergey
  */
 
@@ -53,16 +56,16 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => 'Голодный л�
             <a href="https://www.instagram.com/golodnyilev"><?= Html::img('/images/icons/media-instagram.png', ['alt' => 'media-instagram']) ?></a>
             <div class="media__item-stat">
                 <div>более</div>
-                <div class="media__item-stat-count">1000</div>
-                <div><?= StringHelper::countPostfix(1000, ['подписчик', 'подписчика', 'подписчиков'], false) ?></div>
+                <div class="media__item-stat-count"><?= $instagramSubsCount ?></div>
+                <div><?= StringHelper::countPostfix($instagramSubsCount, ['подписчик', 'подписчика', 'подписчиков'], false) ?></div>
             </div>
         </div>
         <div class="media__item media__item_youtube">
             <a href="https://www.youtube.com/channel/UC1eNb9DPsG4rgKBmREhIsWQ"><?= Html::img('/images/icons/media-youtube.png', ['alt' => 'media-youtube']) ?></a>
             <div class="media__item-stat">
                 <div>более</div>
-                <div class="media__item-stat-count">60000</div>
-                <div><?= StringHelper::countPostfix(1000, ['просмотр', 'просмотра', 'просмотров'], false) ?></div>
+                <div class="media__item-stat-count"><?= $youtubeViewsCount ?></div>
+                <div><?= StringHelper::countPostfix($youtubeViewsCount, ['просмотр', 'просмотра', 'просмотров'], false) ?></div>
             </div>
         </div>
     </div>

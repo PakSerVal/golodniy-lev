@@ -77,7 +77,7 @@ use yii\helpers\Url;
             <h1>Создавай новый ингредиент!!!</h1>
             <div class="form-group">
                 <input type="text" class="ingredient-title">
-                <a href="<?= Url::toRoute(['/ingredient/add']) ?>" class="btn btn-success" data-role="create-ingredient-btn">Создать</a>
+                <a href="<?= Url::toRoute(['/ingredients/add']) ?>" class="btn btn-success" data-role="create-ingredient-btn">Создать</a>
             </div>
         </div>
     </div>
