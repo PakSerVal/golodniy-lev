@@ -23,14 +23,18 @@ class PresearchController extends Controller {
     public function actionIndex(string $q) {
         Yii::$app->response->format = Yii::$app->response::FORMAT_JSON;
 
-        $tags = Tag::find()->where(['ilike', Tag::ATTR_TITLE, $q . '%', false])->all();
 
         $result = [];
-        foreach ($tags as $tag) {
-            $result[] = [
-                'url'   => '/search?q=' . $tag->id,
-                'title' => $tag->title
-            ];
+
+        if (trim($q) !== '') {
+            $tags = Tag::find()->where(['ilike', Tag::ATTR_TITLE, $q . '%', false])->all();
+
+            foreach ($tags as $tag) {
+                $result[] = [
+                    'url'   => '/search?q=' . $tag->id,
+                    'title' => $tag->title
+                ];
+            }
         }
 
         return $result;
