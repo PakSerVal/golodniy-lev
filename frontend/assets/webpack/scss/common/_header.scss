@@ -1,62 +1,110 @@
 .header {
   @include box-shadow(inset 0px -1px 0px #989898);
-  display:         flex;
-  justify-content: center;
-  align-items:     center;
-  height:          117px;
-
-  @include respond-to(tablet) {
-    padding: 0 35px;
-  }
+  height: 60px;
 
   @include respond-to(phone) {
-    justify-content: flex-start;
+    height: 90px;
   }
 
-  &__item {
-    margin:     0 30px;
-    font-size:  22px;
-    width:      110px;
-    text-align: center;
+  &__wrapper {
+    display:         flex;
+    justify-content: center;
+    align-items:     center;
+    height:          100%;
+    max-width:       1200px;
+    margin:          auto;
 
     @include respond-to(phone) {
-      margin: 0 10px;
-      width:  70px;
+      flex-wrap: wrap;
+    }
+  }
+
+  &__search {
+    display:     flex;
+    height:      100%;
+    align-items: center;
+    width:       70%;
+
+    @include respond-to(phone) {
+      width:          50%;
+      flex-direction: column-reverse;
+    }
+  }
+
+  &__media {
+    display:         flex;
+    height:          100%;
+    align-items:     center;
+    justify-content: space-evenly;
+    width:           50%;
+    margin-left:     auto;
+
+    @include respond-to(phone) {
+      width: 100%;
     }
 
-    &_media {
-      width: 230px;
+    a {
+      display:         flex;
+      height:          100%;
+      align-items:     center;
+      text-decoration: none;
+      color:           #000;
 
-      .media-links {
-        display:         flex;
-        align-items:     center;
-        justify-content: space-evenly;
-        margin-bottom:   4px;
+      &:hover {
+        color: #fc7268;
+      }
+
+      @include transition(color, .6s);
+
+      img {
+        height:       32px;
+        width:        32px;
+        margin-right: 5px;
+      }
+
+      @media(max-width: $screen-lg-min) {
+        span {
+          display: none;
+        }
       }
     }
   }
 
   &__logo {
-    display:        flex;
-    flex-direction: column;
-    align-items:    center;
-    width:          205px;
-    height:         149px;
-    z-index:        1000;
+    display:         flex;
+    height:          100%;
+    color:           #fc7268;
+    align-items:     center;
+    text-decoration: none;
+    width:           30%;
+
+    @include respond-to(phone) {
+      width:          50%;
+      flex-direction: column;
+    }
 
     img {
-      height: 100%;
+      height:       60px;
+      margin-right: 12px;
+
+      @include respond-to(tablet) {
+        margin-right: 7px;
+      }
     }
 
     span {
-      display:     block;
-      font-size:   24px;
-      font-weight: bold;
-    }
+      display:        block;
+      font-size:      24px;
+      font-weight:    bold;
+      letter-spacing: 1px;
 
-    @include respond-to(phone) {
-      width:  175px;
-      height: 110px;
+      @include respond-to(tablet) {
+        font-size: 16px;
+      }
+
+      @include respond-to(phone) {
+        font-size: 16px;
+      }
     }
   }
 
@@ -71,7 +119,8 @@
 
 .search-form {
   position: relative;
-  width:    230px;
+  width:    50%;
+  padding:  0 20px;
 
   &__input {
     background:    #fff;
@@ -80,6 +129,16 @@
     font-size:     16px;
     outline-width: 0;
     padding:       0 10px;
+    width:         100%;
+
+    @include respond-to(phone) {
+      font-size: 13px;
+    }
+  }
+
+  @include respond-to(phone) {
+    width:   100%;
+    padding: 0;
   }
 }
 
@@ -87,12 +146,24 @@
   width:         100%;
   border:        1px solid #d9d9d9;
   border-radius: 4px;
+  padding:       2px;
+  overflow:      hidden;
 
   i {
     position: absolute;
-    top:      3px;
-    right:    5px;
+    top:      10px;
+    right:    20px;
     cursor:   pointer;
+  }
+
+  @include respond-to(phone) {
+    width:  auto;
+    margin: 5px 5px 5px;
+
+    i {
+      top:   15px;
+      right: 15px;
+    }
   }
 }
 
@@ -108,10 +179,16 @@
     display:         block;
     text-decoration: none;
     color:           #000;
+    padding:         5px;
 
     &:hover, &.active {
       background-color: #bb4d27;
       color:            #fff;
     }
+  }
+
+  @include respond-to(phone) {
+    margin: 0 5px;
+    bottom: -17px;
   }
 }

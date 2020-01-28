@@ -91,10 +91,14 @@ export default class Presearch {
 
         this.sendRequest(q)
             .then((items: PresearchItem[]) => {
-                this.searchWrapper.style.display = 'block';
                 this.searchWrapper.innerHTML     = '';
                 this.presearchItems              = [];
                 this.selectedIndex               = null;
+
+                if (0 !== items.length) {
+                    this.searchWrapper.style.display = 'block';
+                    this.searchWrapper.style.width   = document.querySelector('.presearch-input-wrapper').clientWidth.toString() + 'px';
+                }
 
                 items.forEach((item: PresearchItem) => {
                     const link = document.createElement('a');

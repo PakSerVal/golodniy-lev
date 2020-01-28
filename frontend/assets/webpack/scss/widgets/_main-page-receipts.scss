@@ -22,10 +22,11 @@
 }
 
 .main-page-receipts-title {
-  display:         flex;
-  justify-content: center;
-  align-items:     center;
-  margin-bottom:   15px;
+  width:                 100%;
+  text-align:            center;
+  text-decoration:       underline;
+  text-decoration-color: #bb4d27;
+  margin-bottom:         15px;
 
   @include respond-to(phone) {
     margin-bottom: 0;

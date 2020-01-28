@@ -13,9 +13,7 @@ use yii\helpers\Url;
  * @author Pak Sergey
  */
 ?>
-<div class="main-page-receipts-title">
-    <?= Html::img('/images/icons/spoon.jpeg', ['alt' => 'spoon']) ?>
-</div>
+<h2 class="main-page-receipts-title">ПОСЛЕДНИЕ ПУБЛИКАЦИИ</h2>
 <div class="container main-page-receipts">
     <?php foreach ($receipts as $receipt): ?>
         <div class="main-page-receipt">

@@ -16,7 +16,7 @@ use yii\web\View;
  * @author Pak Sergey
  */
 
-$this->title = $receipt->title;
+$this->title = $receipt->title . '. Как приготовить' . $receipt->title . '. Авторские рецепты';
 $this->registerMetaTag(['name' => 'description', 'content' => $receipt->description]);
 $this->registerMetaTag(['name' => 'keywords', 'content' => implode(',', ArrayHelper::getColumn($receipt->tags, 'title'))])
 ?>

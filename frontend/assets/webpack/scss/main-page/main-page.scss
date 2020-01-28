@@ -37,6 +37,48 @@
   }
 }
 
+.about {
+  display:       flex;
+  margin-bottom: 30px;
+
+  &-title {
+    width:                 100%;
+    text-align:            center;
+    text-decoration:       underline;
+    text-decoration-color: #bb4d27;
+  }
+
+  &__image {
+    flex-basis:  260px;
+    flex-shrink: 0;
+    text-align:  center;
+    max-height:  163px;
+    overflow:    hidden;
+
+    img {
+      width:  223px;
+      margin: auto;
+    }
+
+    @include respond-to(phone) {
+      flex-basis: 100%;
+    }
+  }
+
+  &__text {
+    margin-right: 40px;
+
+    @include respond-to(phone) {
+      margin-right: 0;
+      padding:      15px;
+    }
+  }
+
+  @include respond-to(phone) {
+    flex-wrap: wrap;
+  }
+}
+
 .media {
   background-image:    url('/images/media-background.png');
   margin-top:          50px;

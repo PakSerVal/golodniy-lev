@@ -17,13 +17,15 @@ use yii\widgets\LinkPager;
  * @author Pak Sergey
  */
 
-$this->title = 'Рецепты';
+$title = 'Рецепты' . (null !== $tagTitle ? ' (' . $tagTitle . ')' : null);
+
+$this->title = $title . '. Голодный лев. Авторские рецепты';
 $this->registerMetaTag(['name' => 'description', 'content' => 'Готовлю простые, вкусные и быстрые блюда по рецептам, доступным каждому.']);
 $this->registerMetaTag(['name' => 'keywords', 'content' => 'Голодный лев, личный сайт, рецепты'])
 ?>
 
 <div class="container receipts-list">
-    <h1 class="receipts-list__title">Рецепты <span><?= null !== $tagTitle ? '(' . $tagTitle . ')' : null ?></span></h1>
+    <h1 class="receipts-list__title"><?= $title ?></h1>
     <?php foreach ($receipts as $receipt): ?>
         <?php $receiptUrl = Url::toRoute(['receipts/view', 'id' => $receipt->id]) ?>
         <div class="receipt">
