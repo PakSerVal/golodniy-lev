@@ -1,7 +1,6 @@
 .receipt-card {
-  max-width:        1200px;
-  margin:           auto;
-  background-color: white;
+  max-width: 1200px;
+  margin:    auto;
 
   &__title {
     margin:      0;
@@ -83,7 +82,7 @@
 
     @include respond-to(phone) {
       flex-basis:      auto;
-      width:           100%;
+      width:           calc(100% - 30px);
       justify-content: center;
     }
   }
