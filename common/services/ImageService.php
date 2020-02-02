@@ -52,15 +52,16 @@ class ImageService {
      */
     public function resize(int $imageId, int $width, int $height) {
         $urlPath = Image::find()->select(Image::ATTR_PATH)->where([Image::ATTR_ID => $imageId])->scalar();
+        $urlPath = Yii::getAlias('@imagesFolder') . '/' . $urlPath;
 
         if (!$urlPath || false === file_exists($urlPath)) {
             return  false;
         }
 
-        $i = new Imagick(Yii::getAlias('@imagesFolder') . '/' . $urlPath);
+        $i = new Imagick($urlPath);
         $i->thumbnailImage($width, $height);
 
-        return $i->writeImage(Yii::getAlias('@imagesFolder') . '/' . $urlPath);
+        return $i->writeImage($urlPath);
     }
 
     /**
