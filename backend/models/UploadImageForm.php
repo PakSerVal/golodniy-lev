@@ -14,6 +14,8 @@ use yii\web\UploadedFile;
  * Upload image form.
  */
 class UploadImageForm extends Model {
+    const RECEIPT_IMAGE_WIDTH = 750;
+
     /** @var ImageService */
     private $service;
 
@@ -45,7 +47,13 @@ class UploadImageForm extends Model {
      */
     public function upload(): ?int {
         if ($this->validate()) {
-            return $this->service->upload($this->file);
+            $imageId = $this->service->upload($this->file);
+
+            if (null !== $imageId) {
+                if ($this->service->resize($imageId, static::RECEIPT_IMAGE_WIDTH, 0)) {
+                    return $imageId;
+                }
+            }
         }
 
         return null;

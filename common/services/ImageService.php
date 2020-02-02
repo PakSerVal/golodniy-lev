@@ -3,6 +3,7 @@
 namespace common\services;
 
 use common\models\Image;
+use Imagick;
 use Yii;
 use yii\web\UploadedFile;
 
@@ -29,15 +30,37 @@ class ImageService {
      * @return int
      */
     public function upload(UploadedFile $file): int {
-        $path = md5($file->baseName . $file->size) . '.' . $file->extension;
-        $file->saveAs(Yii::getAlias('@imagesFolder') . '/' . $path);
+        $urlPath = md5($file->baseName . $file->size) . '.' . $file->extension;
+        $file->saveAs(Yii::getAlias('@imagesFolder') . '/' . $urlPath);
 
         $image       = new Image();
         $image->name = $file->baseName;
-        $image->path = $path;
+        $image->path = $urlPath;
         $image->save();
 
         return $image->id;
+    }
+
+    /**
+     * @param int  $imageId
+     * @param int  $width
+     * @param int  $height
+     *
+     * @return bool
+     *
+     * @author Pak Sergey
+     */
+    public function resize(int $imageId, int $width, int $height) {
+        $urlPath = Image::find()->select(Image::ATTR_PATH)->where([Image::ATTR_ID => $imageId])->scalar();
+
+        if (!$urlPath || false === file_exists($urlPath)) {
+            return  false;
+        }
+
+        $i = new Imagick(Yii::getAlias('@imagesFolder') . '/' . $urlPath);
+        $i->thumbnailImage($width, $height);
+
+        return $i->writeImage(Yii::getAlias('@imagesFolder') . '/' . $urlPath);
     }
 
     /**

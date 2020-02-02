@@ -13,7 +13,7 @@ use yii\db\ActiveRecord;
  *
  * @property string $id
  * @property string $content
- * @property string $image_id
+ * @property int    $image_id
  * @property int    $number
  * @property int    $receipt_id
  *
