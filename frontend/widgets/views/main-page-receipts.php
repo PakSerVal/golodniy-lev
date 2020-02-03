@@ -13,8 +13,8 @@ use yii\helpers\Url;
  * @author Pak Sergey
  */
 ?>
-<h2 class="main-page-receipts-title">ПОСЛЕДНИЕ ПУБЛИКАЦИИ</h2>
-<div class="container main-page-receipts">
+<div class="container main-page-receipts layer">
+    <h2 class="main-page-receipts-title">ПОСЛЕДНИЕ ПУБЛИКАЦИИ</h2>
     <?php foreach ($receipts as $receipt): ?>
         <div class="main-page-receipt">
             <div class="main-page-receipt__wrapper">

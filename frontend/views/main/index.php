@@ -47,7 +47,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => 'Голодный л�
     </div>
 </div>
 
-<section class="container">
+<section class="container layer">
     <h2 class="about-title">ОБО МНЕ</h2>
     <div class="about">
         <div class="about__image">
@@ -60,9 +60,10 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => 'Голодный л�
     </div>
 </section>
 
-<section>
+<section class="main-page-receipts">
     <?= MainPageReceipts::widget() ?>
 </section>
+
 <section class="media">
     <div class="media__title">СОЦИАЛЬНЫЕ СЕТИ</div>
     <div class="media__items">

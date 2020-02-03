@@ -10,14 +10,15 @@
 @import "site-error/site-error";
 
 body {
-  height:      100%;
-  position:    relative;
-  padding:     0;
-  margin:      0;
-  font-family: 'PTSans Regular', serif;
-  font-size:   16px;
-  font-weight: 300;
-  color:       $base-color;
+  height:           100%;
+  background-color: #f6f6f6;
+  position:         relative;
+  padding:          0;
+  margin:           0;
+  font-family:      'PTSans Regular', serif;
+  font-size:        16px;
+  font-weight:      300;
+  color:            $base-color;
 
   main {
     min-height: calc(100vh - 152px);

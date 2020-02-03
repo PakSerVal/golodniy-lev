@@ -21,7 +21,7 @@ $this->registerMetaTag(['name' => 'description', 'content' => $receipt->descript
 $this->registerMetaTag(['name' => 'keywords', 'content' => implode(',', ArrayHelper::getColumn($receipt->tags, 'title'))])
 ?>
 
-<div class="receipt-card">
+<div class="receipt-card layer">
     <h1 class="receipt-card__title"><?= $receipt->title ?></h1>
     <div class="receipt-card__description"><?= $receipt->description ?></div>
     <?php if (null !== $receipt->videoUrl && '' !== $receipt->videoUrl): ?>

@@ -1,3 +1,3 @@
 <footer class="footer">
-    <div class="footer__developer">Developed by pakman</div>
+    <div class="footer__developer">developed by pakman</div>
 </footer>

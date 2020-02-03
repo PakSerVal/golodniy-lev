@@ -24,23 +24,25 @@ $this->registerMetaTag(['name' => 'description', 'content' => 'Готовлю п
 $this->registerMetaTag(['name' => 'keywords', 'content' => 'Голодный лев, личный сайт, рецепты'])
 ?>
 
-<div class="container receipts-list">
+<div class="container layer receipts-list">
     <h1 class="receipts-list__title"><?= $title ?></h1>
     <?php foreach ($receipts as $receipt): ?>
         <?php $receiptUrl = Url::toRoute(['receipts/view', 'id' => $receipt->id]) ?>
         <div class="receipt">
-            <div class="receipt__image">
-                <a href="<?= $receiptUrl ?>"><?= Html::img($receipt->imageUrl) ?></a>
-            </div>
-            <div class="receipt__title">
-                <?= Html::a($receipt->title, $receiptUrl, ['class' => 'link']) ?>
-            </div>
-            <div class="receipt__description">
-                <?= StringHelper::truncate($receipt->description, 90) ?>
-            </div>
-            <div class="receipt__stats">
-                <div class="receipt__date"><i></i><?= $receipt->date->format('d.m.y') ?></div>
-                <div class="receipt__views-count"><i></i><?= $receipt->viewsCount ?></div>
+            <div class="receipt__wrapper">
+                <div class="receipt__image">
+                    <a href="<?= $receiptUrl ?>"><?= Html::img($receipt->imageUrl) ?></a>
+                </div>
+                <div class="receipt__title">
+                    <?= Html::a($receipt->title, $receiptUrl, ['class' => 'link']) ?>
+                </div>
+                <div class="receipt__description">
+                    <?= StringHelper::truncate($receipt->description, 90) ?>
+                </div>
+                <div class="receipt__stats">
+                    <div class="receipt__date"><i></i><?= $receipt->date->format('d.m.y') ?></div>
+                    <div class="receipt__views-count"><i></i><?= $receipt->viewsCount ?></div>
+                </div>
             </div>
         </div>
     <?php endforeach; ?>
