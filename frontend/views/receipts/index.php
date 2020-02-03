@@ -1,9 +1,9 @@
 <?php
 
+use common\helpers\Html;
 use common\helpers\StringHelper;
 use frontend\dto\Receipt;
 use yii\data\Pagination;
-use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
 
@@ -31,7 +31,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => 'Голодный л�
         <div class="receipt">
             <div class="receipt__wrapper">
                 <div class="receipt__image">
-                    <a href="<?= $receiptUrl ?>"><?= Html::img($receipt->imageUrl) ?></a>
+                    <a href="<?= $receiptUrl ?>"><?= Html::lazyImg($receipt->imageUrl) ?></a>
                 </div>
                 <div class="receipt__title">
                     <?= Html::a($receipt->title, $receiptUrl, ['class' => 'link']) ?>

@@ -1,8 +1,8 @@
 <?php
 
+use common\helpers\Html;
 use common\helpers\StringHelper;
 use frontend\dto\Receipt;
-use yii\helpers\Html;
 use yii\helpers\Url;
 
 /**
@@ -20,7 +20,7 @@ use yii\helpers\Url;
             <div class="main-page-receipt__wrapper">
                 <a href="<?= Url::toRoute(['receipts/view', 'id' => $receipt->id]) ?>">
                     <div class="main-page-receipt__image">
-                        <?= Html::img($receipt->imageUrl, ['alt' => $receipt->title]) ?>
+                        <?= Html::lazyImg($receipt->imageUrl, ['alt' => $receipt->title]) ?>
                     </div>
                 </a>
                 <a href="<?= Url::toRoute(['receipts/view', 'id' => $receipt->id]) ?>">
