@@ -77,7 +77,7 @@
   &__date-views-wrapper {
     display:     flex;
     padding:     15px;
-    flex-basis:  130px;
+    flex-basis:  160px;
     flex-shrink: 0;
 
     @include respond-to(phone) {

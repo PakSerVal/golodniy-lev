@@ -1,7 +1,8 @@
 .header {
+  background: white;
   @include box-shadow(0 1px 24px 0 rgba(0, 0, 0, .14));
-  height:  60px;
-  z-index: 1050;
+  height:     60px;
+  z-index:    1050;
 
   @include respond-to(phone) {
     height: 90px;
@@ -14,6 +15,7 @@
     height:          100%;
     max-width:       1200px;
     margin:          auto;
+    padding:         0 40px 0 0;
 
     @include respond-to(phone) {
       flex-wrap: wrap;
@@ -90,6 +92,7 @@
 
   &__logo {
     display:         flex;
+    justify-content: center;
     height:          100%;
     color:           #fc7268;
     align-items:     center;
@@ -103,7 +106,7 @@
 
     img {
       height:       55px;
-      margin-right: 12px;
+      margin-right: 8px;
 
       @include respond-to(tablet) {
         margin-right: 7px;
@@ -161,6 +164,7 @@
 }
 
 .presearch-input-wrapper {
+  background:    #fff;
   width:         100%;
   border:        1px solid #d9d9d9;
   border-radius: 4px;
