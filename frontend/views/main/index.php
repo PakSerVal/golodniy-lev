@@ -51,7 +51,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => 'Голодный л�
     <h2 class="about-title">ОБО МНЕ</h2>
     <div class="about">
         <div class="about__image">
-            <?= Html::lazyImg('/images/lev.png', ['alt' => 'lev']) ?>
+            <?= Html::img('/images/lev.png', ['alt' => 'lev']) ?>
         </div>
         <div class="about__text">
             Я - обычный парень, житель Дальнего Востока. Люблю не просто готовить, а экспериментировать, в результате чего порой получаются не совсем стандартные блюда. В последнее время активно занимаюсь спортом, из-за чего стараюсь выпускать рецепты правильного питания, которые использую сам в повседневной жизни.
@@ -68,7 +68,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => 'Голодный л�
     <div class="media__title">СОЦИАЛЬНЫЕ СЕТИ</div>
     <div class="media__items">
         <div class="media__item media__item_instagram">
-            <a href="https://www.instagram.com/golodnyilev"><?= Html::lazyImg('/images/icons/media-instagram.png', ['alt' => 'media-instagram']) ?></a>
+            <a href="https://www.instagram.com/golodnyilev"><?= Html::img('/images/icons/media-instagram.png', ['alt' => 'media-instagram']) ?></a>
             <div class="media__item-stat">
                 <div>более</div>
                 <div class="media__item-stat-count"><?= $instagramSubsCount ?></div>
@@ -76,7 +76,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => 'Голодный л�
             </div>
         </div>
         <div class="media__item media__item_youtube">
-            <a href="https://www.youtube.com/channel/UC1eNb9DPsG4rgKBmREhIsWQ"><?= Html::lazyImg('/images/icons/media-youtube.png', ['alt' => 'media-youtube']) ?></a>
+            <a href="https://www.youtube.com/channel/UC1eNb9DPsG4rgKBmREhIsWQ"><?= Html::img('/images/icons/media-youtube.png', ['alt' => 'media-youtube']) ?></a>
             <div class="media__item-stat">
                 <div>более</div>
                 <div class="media__item-stat-count"><?= $youtubeViewsCount ?></div>
